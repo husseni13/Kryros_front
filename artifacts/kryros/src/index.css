@@ -63,27 +63,27 @@
   --default-font-family:      var(--app-font-sans);
   --default-mono-font-family: var(--app-font-mono);
 
-  --text-xs:   0.75rem;
-  --text-sm:   0.875rem;
-  --text-base: 0.875rem;
-  --text-md:   1rem;
-  --text-lg:   1.125rem;
-  --text-xl:   1.25rem;
-  --text-2xl:  1.5rem;
-  --text-3xl:  1.75rem;
-  --text-4xl:  2.125rem;
-  --text-5xl:  2.5rem;
+  --text-xs:   0.8125rem;
+  --text-sm:   0.9375rem;
+  --text-base: 1rem;
+  --text-md:   1.0625rem;
+  --text-lg:   1.1875rem;
+  --text-xl:   1.3125rem;
+  --text-2xl:  1.5625rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  2.75rem;
 
-  --leading-xs:   1rem;
-  --leading-sm:   1.25rem;
-  --leading-base: 1.25rem;
-  --leading-md:   1.5rem;
-  --leading-lg:   1.625rem;
-  --leading-xl:   1.75rem;
-  --leading-2xl:  2rem;
-  --leading-3xl:  2.25rem;
-  --leading-4xl:  2.625rem;
-  --leading-5xl:  3rem;
+  --leading-xs:   1.125rem;
+  --leading-sm:   1.375rem;
+  --leading-base: 1.5rem;
+  --leading-md:   1.625rem;
+  --leading-lg:   1.75rem;
+  --leading-xl:   1.875rem;
+  --leading-2xl:  2.125rem;
+  --leading-3xl:  2.5rem;
+  --leading-4xl:  2.875rem;
+  --leading-5xl:  3.25rem;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -215,40 +215,40 @@
   --elevate-1: rgba(255,255,255,.04);
   --elevate-2: rgba(255,255,255,.09);
 
-  --background: #0f1115;
+  --background: #000000;
   --foreground: #ffffff;
 
-  --card:             #161b22;
+  --card:             #0d0d0d;
   --card-foreground:  #ffffff;
-  --card-border:      #2a2f37;
+  --card-border:      #222222;
 
-  --border: #2a2f37;
-  --input:  #2a2f37;
+  --border: #222222;
+  --input:  #222222;
   --ring:   #1fa89a;
 
   --primary:            #1fa89a;
   --primary-foreground: #ffffff;
   --primary-border:     #30d9c8;
 
-  --secondary:            #2a2f37;
+  --secondary:            #1a1a1a;
   --secondary-foreground: #ffffff;
-  --secondary-border:     #3a414d;
+  --secondary-border:     #2a2a2a;
 
-  --muted:            #2a2f37;
-  --muted-foreground: #94a3b8;
-  --muted-border:     #3a414d;
+  --muted:            #1a1a1a;
+  --muted-foreground: #a0a0a0;
+  --muted-border:     #2a2a2a;
 
-  --accent:            #2a2f37;
+  --accent:            #1a1a1a;
   --accent-foreground: #ffffff;
-  --accent-border:     #3a414d;
+  --accent-border:     #2a2a2a;
 
   --destructive:            #7f1d1d;
   --destructive-foreground: #ffffff;
   --destructive-border:     #991b1b;
 
-  --popover:            #161b22;
+  --popover:            #0d0d0d;
   --popover-foreground: #ffffff;
-  --popover-border:     #2a2f37;
+  --popover-border:     #222222;
 
   --chart-1: #1fa89a;
   --chart-2: #72ca2b;
@@ -256,15 +256,15 @@
   --chart-4: #3080e8;
   --chart-5: #7f1d1d;
 
-  --sidebar:                    #161b22;
+  --sidebar:                    #0d0d0d;
   --sidebar-foreground:         #f4f4f5;
-  --sidebar-border:             #2a2f37;
+  --sidebar-border:             #222222;
   --sidebar-primary:            #1fa89a;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-primary-border:     #30d9c8;
-  --sidebar-accent:             #2a2f37;
+  --sidebar-accent:             #1a1a1a;
   --sidebar-accent-foreground:  #f4f4f5;
-  --sidebar-accent-border:      #3a414d;
+  --sidebar-accent-border:      #2a2a2a;
   --sidebar-ring:               #1fa89a;
 
   --brand-teal:       #1fa89a;
@@ -298,8 +298,8 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -310,9 +310,9 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.55;
     min-height: 100vh;
   }
 
@@ -361,20 +361,20 @@
   }
 
   p {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.55;
     color: inherit;
   }
 
   small {
-    font-size: 12px;
-    line-height: 1.33;
+    font-size: 13px;
+    line-height: 1.4;
   }
 
   label {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1.5;
   }
 
@@ -469,38 +469,38 @@
   }
 
   .product-title {
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 500;
     color: inherit;
   }
   .price {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 700;
     color: inherit;
     line-height: 1.2;
   }
   .price-card {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     color: inherit;
     line-height: 1.25;
   }
   .price-original {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
     color: var(--muted-foreground);
     text-decoration: line-through;
   }
   .meta-text {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--muted-foreground);
-    line-height: 1.33;
-  }
-  .nav-text {
     font-size: 13px;
     font-weight: 400;
+    color: var(--muted-foreground);
+    line-height: 1.4;
+  }
+  .nav-text {
+    font-size: 15px;
+    font-weight: 500;
     color: inherit;
   }
 
