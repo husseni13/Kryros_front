@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from "react";
 
-const API_BASE = (import.meta.env.VITE_API_URL || "/backend") + "/api";
+export const API_BASE = (import.meta.env.VITE_API_URL || "/backend") + "/api";
 
 export type AuthUser = {
   id: string;
@@ -25,6 +25,7 @@ type AuthContextType = {
   login: (token: string, user?: AuthUser) => void;
   logout: () => void;
   refetchUser: () => void;
+  updateUser: (patch: Partial<AuthUser>) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -35,6 +36,7 @@ const AuthContext = createContext<AuthContextType>({
   login: () => {},
   logout: () => {},
   refetchUser: () => {},
+  updateUser: () => {},
 });
 
 async function fetchUserFromApi(token: string): Promise<AuthUser | null> {
@@ -42,29 +44,14 @@ async function fetchUserFromApi(token: string): Promise<AuthUser | null> {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
-
   const endpoints = ["/auth/me", "/users/profile", "/users/me"];
-
   for (const endpoint of endpoints) {
     try {
       const res = await fetch(`${API_BASE}${endpoint}`, { headers });
       if (res.ok) {
         const data = await res.json();
         const u = data.data || data.user || data;
-        return {
-          id: u.id || u._id || "",
-          firstName: u.firstName || u.first_name || "",
-          lastName: u.lastName || u.last_name || "",
-          name: u.name || `${u.firstName || u.first_name || ""} ${u.lastName || u.last_name || ""}`.trim() || u.email?.split("@")[0] || "User",
-          email: u.email || "",
-          phone: u.phone || u.phoneNumber || "",
-          avatar: u.avatar || u.avatarUrl || "",
-          country: u.country || "",
-          memberSince: u.createdAt ? new Date(u.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" }) : "",
-          ordersCount: u.ordersCount ?? u._count?.orders ?? 0,
-          reviewsCount: u.reviewsCount ?? u._count?.reviews ?? 0,
-          couponsCount: u.couponsCount ?? u._count?.coupons ?? 0,
-        };
+        return mapApiUser(u);
       }
     } catch {
       continue;
@@ -73,7 +60,29 @@ async function fetchUserFromApi(token: string): Promise<AuthUser | null> {
   return null;
 }
 
-function getInitials(user: AuthUser): string {
+export function mapApiUser(u: any): AuthUser {
+  const firstName = u.firstName || u.first_name || "";
+  const lastName = u.lastName || u.last_name || "";
+  const fullName = u.name || `${firstName} ${lastName}`.trim() || u.email?.split("@")[0] || "User";
+  return {
+    id: u.id || u._id || "",
+    firstName,
+    lastName,
+    name: fullName,
+    email: u.email || "",
+    phone: u.phone || u.phoneNumber || u.phone_number || "",
+    avatar: u.avatar || u.avatarUrl || "",
+    country: u.country || "",
+    memberSince: u.createdAt
+      ? new Date(u.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+      : "",
+    ordersCount: u.ordersCount ?? u._count?.orders ?? 0,
+    reviewsCount: u.reviewsCount ?? u._count?.reviews ?? 0,
+    couponsCount: u.couponsCount ?? u._count?.coupons ?? 0,
+  };
+}
+
+export function getInitials(user: Partial<AuthUser>): string {
   if (user.firstName && user.lastName) {
     return `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
   }
@@ -132,8 +141,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) fetchUser(token);
   }, [token, fetchUser]);
 
+  const updateUser = useCallback((patch: Partial<AuthUser>) => {
+    setUser((prev) => {
+      if (!prev) return prev;
+      const next = { ...prev, ...patch };
+      if (patch.firstName || patch.lastName) {
+        next.name = `${patch.firstName ?? prev.firstName ?? ""} ${patch.lastName ?? prev.lastName ?? ""}`.trim();
+      }
+      next.avatar = getInitials(next);
+      return next;
+    });
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, token, isLoggedIn: !!token, isLoading, login, logout, refetchUser }}>
+    <AuthContext.Provider
+      value={{ user, token, isLoggedIn: !!token, isLoading, login, logout, refetchUser, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
