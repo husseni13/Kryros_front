@@ -58,7 +58,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="kryros-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="kryros-ui-theme">
         <AuthProvider>
           <CurrencyProvider>
             <CartProvider>
