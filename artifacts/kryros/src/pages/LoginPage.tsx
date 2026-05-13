@@ -36,10 +36,9 @@ export default function LoginPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    loginMutation.mutate({ 
-      email: tab === "email" ? email : undefined,
-      phone: tab === "phone" ? phone : undefined,
-      password 
+    loginMutation.mutate({
+      identifier: tab === "email" ? email : phone,
+      password,
     });
   };
 
