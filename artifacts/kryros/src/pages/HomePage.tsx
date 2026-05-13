@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight, Zap, Star, Shield, Truck, CreditCard,
-  ChevronRight, ChevronLeft, Play, VolumeX, ShoppingCart, Check,
+  ChevronRight, ChevronLeft, Play, VolumeX, ShoppingCart, Check, Heart, Plus,
 } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
@@ -71,48 +71,49 @@ function FlashSaleCard({ product }: { product: any }) {
 
   return (
     <Link href={`/product/${product.id}`}>
-      <div className="flex-shrink-0 w-[155px] sm:w-[170px] bg-card border border-orange-500/20 rounded-2xl overflow-hidden hover:shadow-lg hover:border-orange-500/50 transition-all duration-300 cursor-pointer group">
-        {/* Image */}
-        <div className="relative aspect-square overflow-hidden bg-muted/30">
+      <div className="flex-shrink-0 w-[155px] sm:w-[170px] bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group relative">
+        {/* Image — full bleed */}
+        <div className="aspect-square w-full overflow-hidden bg-muted/20">
           <img
             src={image || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200"}
             alt={s(product.name)}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          {/* Discount badge */}
-          {discount > 0 && (
-            <div className="absolute top-2 left-2 bg-orange-500 text-white text-[11px] font-black px-2 py-0.5 rounded-full">
-              -{discount}%
-            </div>
-          )}
-          {/* Lightning icon */}
-          <div className="absolute top-2 right-2 h-6 w-6 rounded-full bg-orange-500/90 flex items-center justify-center">
-            <Zap className="h-3 w-3 text-white fill-white" />
+        </div>
+
+        {/* Discount badge — red pill, top-left over image */}
+        {discount > 0 && (
+          <div className="absolute top-2.5 left-2.5 z-10 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full leading-tight">
+            -{discount}%
           </div>
+        )}
+
+        {/* Heart — circle, top-right over image */}
+        <div className="absolute top-2.5 right-2.5 z-10 h-8 w-8 rounded-full bg-white/90 dark:bg-white/15 backdrop-blur-sm flex items-center justify-center">
+          <Heart className="h-4 w-4 text-muted-foreground" />
         </div>
 
         {/* Info */}
-        <div className="p-2.5">
-          <p className="text-[11px] text-muted-foreground font-medium truncate">{s(product.brand?.name) || "KRYROS"}</p>
-          <p className="text-xs font-semibold text-foreground leading-tight line-clamp-2 mt-0.5 mb-2 min-h-[32px]">{s(product.name)}</p>
+        <div className="px-2.5 pt-2 pb-2.5">
+          <p className="text-[13px] font-semibold text-foreground leading-snug line-clamp-2 min-h-[2.2rem]">{s(product.name)}</p>
 
-          <div className="flex items-baseline gap-1.5 mb-2">
-            <span className="text-sm font-black text-orange-500">{formatPrice(currentPrice)}</span>
+          <div className="flex items-baseline gap-1.5 mt-1.5 mb-2 flex-wrap">
+            <span className="text-[15px] font-bold text-foreground">{formatPrice(currentPrice)}</span>
             {discount > 0 && (
-              <span className="text-[10px] text-muted-foreground line-through">{formatPrice(originalPrice)}</span>
+              <span className="text-[11px] text-muted-foreground line-through">{formatPrice(originalPrice)}</span>
             )}
           </div>
 
           <button
             onClick={handleAdd}
             className={cn(
-              "w-full flex items-center justify-center gap-1.5 rounded-full h-7 text-[11px] font-bold transition-all",
+              "w-full flex items-center justify-center gap-1.5 rounded-full h-9 text-[12px] font-semibold transition-all",
               added
                 ? "bg-green-500 text-white"
-                : "bg-orange-500 hover:bg-orange-600 text-white"
+                : "bg-[#1FA89A] hover:bg-[#18978a] text-white"
             )}
           >
-            {added ? <><Check className="h-3 w-3" /> Added</> : <><ShoppingCart className="h-3 w-3" /> Add to Cart</>}
+            {added ? <><Check className="h-3.5 w-3.5" /> Added</> : <><Plus className="h-3.5 w-3.5" /> Add to Cart</>}
           </button>
         </div>
       </div>
