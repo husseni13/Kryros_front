@@ -199,6 +199,8 @@
 
   --radius: 0.75rem;
 
+  color-scheme: light;
+
   --shadow-2xs: 0px 1px 2px 0px rgba(0, 0, 0, 0.04);
   --shadow-xs: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
   --shadow-sm: 0px 1px 3px 0px rgba(0, 0, 0, 0.07), 0px 1px 2px -1px rgba(0, 0, 0, 0.05);
@@ -282,6 +284,8 @@
   --brand-teal-dark: 174 69% 30%;
   --brand-teal-light: 174 69% 52%;
 
+  color-scheme: dark;
+
   /* Text scale — dark mode */
   --text-primary:   #ffffff;
   --text-secondary: #bbbbbb;
@@ -294,28 +298,26 @@
   * {
     @apply border-border;
     box-sizing: border-box;
-    color: var(--text-primary);
   }
 
   a {
-    color: var(--text-link);
+    color: inherit;
     text-decoration: none;
   }
-  a:visited {
-    color: var(--text-link);
-  }
   a:hover {
-    color: var(--primary);
+    color: hsl(var(--primary));
   }
 
   /* ── Typography Base ── */
   html {
+    @apply bg-background;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    min-height: 100%;
   }
 
   body {
@@ -324,6 +326,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
+    min-height: 100vh;
   }
 
   /* Heading scale */
