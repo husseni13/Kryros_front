@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Home, Search, Heart, ShoppingCart, User } from "lucide-react";
+import { Home, Store, CreditCard, ShoppingCart, PackageSearch } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/CartContext";
 
@@ -8,11 +8,11 @@ export function BottomNav() {
   const { itemCount } = useCart();
 
   const navItems = [
-    { name: "Home",     href: "/",          icon: Home        },
-    { name: "Search",   href: "/shop",       icon: Search      },
-    { name: "Wishlist", href: "/wishlist",   icon: Heart       },
-    { name: "Cart",     href: "/cart",       icon: ShoppingCart, badge: itemCount },
-    { name: "Me",       href: "/dashboard",  icon: User        },
+    { name: "HOME",  href: "/",            icon: Home,          pay: false },
+    { name: "SHOP",  href: "/shop",        icon: Store,         pay: false },
+    { name: "PAY",   href: "/checkout",    icon: CreditCard,    pay: true  },
+    { name: "CART",  href: "/cart",        icon: ShoppingCart,  pay: false, badge: itemCount },
+    { name: "TRACK", href: "/track-order", icon: PackageSearch, pay: false },
   ];
 
   return (
@@ -21,6 +21,23 @@ export function BottomNav() {
         {navItems.map((item) => {
           const isActive = location === item.href || (item.href !== "/" && location.startsWith(item.href));
           const Icon = item.icon;
+
+          if (item.pay) {
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex flex-col items-center justify-center w-full h-full gap-1"
+              >
+                <div className="relative flex items-center justify-center h-9 w-9 rounded-xl bg-primary">
+                  <Icon className="h-5 w-5 text-white" strokeWidth={2} />
+                </div>
+                <span className="text-[10px] font-bold text-primary tracking-wide">
+                  {item.name}
+                </span>
+              </Link>
+            );
+          }
 
           return (
             <Link
@@ -32,14 +49,14 @@ export function BottomNav() {
               )}
             >
               <div className="relative">
-                <Icon className={cn("h-5 w-5", isActive && "text-primary")} />
+                <Icon className={cn("h-5 w-5", isActive && "text-primary")} strokeWidth={1.75} />
                 {item.badge != null && item.badge > 0 && (
                   <span className="absolute -top-1.5 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
                     {item.badge > 9 ? "9+" : item.badge}
                   </span>
                 )}
               </div>
-              <span className={cn("text-[10px] font-medium", isActive && "text-primary")}>
+              <span className={cn("text-[10px] font-semibold tracking-wide", isActive ? "text-primary" : "")}>
                 {item.name}
               </span>
             </Link>
