@@ -392,7 +392,7 @@ function HeroSection({ slides }: { slides: any[] }) {
               {slide.tag || slide.subtitle}
               {slide.badge && <><span className="w-px h-3 bg-white/30" /><span className="text-amber-300">{slide.badge}</span></>}
             </div>
-            <h1 key={`title-${current}`} className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05] whitespace-pre-line drop-shadow-lg animate-fade-in">
+            <h1 key={`title-${current}`} className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.1] whitespace-pre-line drop-shadow-lg animate-fade-in">
               {slide.title}
             </h1>
             <p key={`sub-${current}`} className="text-sm md:text-base text-white/85 font-light leading-relaxed max-w-md animate-fade-in">
