@@ -111,67 +111,67 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .07);
 
-  /* Backgrounds — #FFFFFF */
+  /* Backgrounds — pure white */
   --background: 0 0% 100%;
-  --foreground: 0 0% 7%;
+  --foreground: 224 71.4% 4.1%;
 
-  /* Cards — #F5F5F5 with #E5E5E5 border */
-  --card: 0 0% 96%;
-  --card-foreground: 0 0% 7%;
-  --card-border: 0 0% 90%;
+  /* Cards — pure white */
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+  --card-border: 214.3 31.8% 91.4%;
 
-  /* Border — #E5E5E5 */
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
+  /* Border */
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
   --ring: 174 69% 39%;
 
   /* Primary brand — #1FA89A */
   --primary: 174 69% 39%;
-  --primary-foreground: 0 0% 100%;
+  --primary-foreground: 210 40% 98%;
 
-  /* Secondary — neutral grey section bg (#F7F7F7) */
-  --secondary: 0 0% 97%;
-  --secondary-foreground: 0 0% 7%;
+  /* Secondary */
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
 
-  /* Muted — soft grey (#F5F5F5), muted text (#666666) */
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 40%;
+  /* Muted */
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
 
-  /* Accent — same as primary */
-  --accent: 174 69% 39%;
-  --accent-foreground: 0 0% 100%;
+  /* Accent */
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
 
-  /* Destructive — #C91432 */
-  --destructive: 350 82% 43%;
-  --destructive-foreground: 0 0% 100%;
+  /* Destructive */
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
 
   /* Popover */
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 7%;
-  --popover-border: 0 0% 90%;
+  --popover-foreground: 224 71.4% 4.1%;
+  --popover-border: 214.3 31.8% 91.4%;
 
   /* Charts */
   --chart-1: 174 69% 39%;
   --chart-2: 93 72% 38%;
   --chart-3: 42 100% 50%;
   --chart-4: 214 94% 38%;
-  --chart-5: 350 82% 43%;
+  --chart-5: 0 84.2% 60.2%;
 
   /* Sidebar */
-  --sidebar: 0 0% 100%;
-  --sidebar-foreground: 0 0% 7%;
-  --sidebar-border: 0 0% 90%;
+  --sidebar: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-border: 240 5.9% 90%;
   --sidebar-primary: 174 69% 39%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 0 0% 96%;
-  --sidebar-accent-foreground: 0 0% 7%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
   --sidebar-ring: 174 69% 39%;
 
-  /* Font system — system UI stack only */
-  --app-font-sans: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  /* Font system — Inter */
+  --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-serif: Georgia, serif;
-  --app-font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
-  --app-font-display: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --app-font-mono: Menlo, monospace;
+  --app-font-display: 'Inter', system-ui, sans-serif;
 
   /* Text scale — light mode */
   --text-primary:   #111111;
@@ -197,7 +197,7 @@
   --cat-yellow: #F5AF02;
   --cat-green:  #86B817;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
   --shadow-2xs: 0px 1px 2px 0px rgba(0, 0, 0, 0.04);
   --shadow-xs: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
@@ -233,54 +233,54 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 220 17% 7%;
+  --background: 220 16% 7%;
   --foreground: 0 0% 100%;
 
-  --card: 214 18% 15%;
+  --card: 215 21% 11%;
   --card-foreground: 0 0% 100%;
   --card-border: 215 13% 19%;
 
   --border: 215 13% 19%;
   --input: 215 13% 19%;
-  --ring: 174 65% 48%;
+  --ring: 174 69% 39%;
 
-  --primary: 174 65% 48%;
-  --primary-foreground: 0 0% 7%;
+  --primary: 174 69% 39%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 214 18% 18%;
+  --secondary: 215 13% 19%;
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 214 18% 18%;
-  --muted-foreground: 0 0% 73%;
+  --muted: 215 13% 19%;
+  --muted-foreground: 215 20.2% 65.1%;
 
-  --accent: 174 65% 48%;
-  --accent-foreground: 0 0% 7%;
+  --accent: 215 13% 19%;
+  --accent-foreground: 0 0% 100%;
 
-  --destructive: 350 75% 55%;
+  --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 100%;
 
-  --popover: 214 18% 15%;
+  --popover: 215 21% 11%;
   --popover-foreground: 0 0% 100%;
   --popover-border: 215 13% 19%;
 
-  --chart-1: 174 65% 48%;
+  --chart-1: 174 69% 39%;
   --chart-2: 93 65% 48%;
   --chart-3: 42 90% 55%;
   --chart-4: 214 80% 55%;
-  --chart-5: 350 75% 55%;
+  --chart-5: 0 62.8% 30.6%;
 
-  --sidebar: 220 17% 7%;
-  --sidebar-foreground: 0 0% 100%;
+  --sidebar: 215 21% 11%;
+  --sidebar-foreground: 240 4.8% 95.9%;
   --sidebar-border: 215 13% 19%;
-  --sidebar-primary: 174 65% 48%;
-  --sidebar-primary-foreground: 0 0% 7%;
-  --sidebar-accent: 214 18% 18%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-ring: 174 65% 48%;
+  --sidebar-primary: 174 69% 39%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 215 13% 19%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-ring: 174 69% 39%;
 
-  --brand-teal: 174 65% 48%;
-  --brand-teal-dark: 174 65% 38%;
-  --brand-teal-light: 174 65% 62%;
+  --brand-teal: 174 69% 39%;
+  --brand-teal-dark: 174 69% 30%;
+  --brand-teal-light: 174 69% 52%;
 
   /* Text scale — dark mode */
   --text-primary:   #ffffff;
@@ -308,9 +308,9 @@
     color: var(--primary);
   }
 
-  /* ── eBay Typography Base ── */
+  /* ── Typography Base ── */
   html {
-    font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -320,7 +320,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
@@ -384,16 +384,15 @@
     line-height: 1.5;
   }
 
-  /* eBay button spec: 16px, bold, 24px radius */
   button {
-    font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     font-weight: 700;
     border-radius: 24px;
   }
 
   input, textarea, select {
-    font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.5;
   }

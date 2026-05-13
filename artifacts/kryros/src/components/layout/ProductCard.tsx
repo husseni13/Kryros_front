@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Heart, Check, Plus } from "lucide-react";
+import { Heart, Plus, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
-import { cn } from "@/lib/utils";
 
 type Product = {
   id: number;
@@ -22,7 +23,7 @@ type Product = {
   badge?: string | null;
 };
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   const { addToCart } = useCart();
   const { formatPrice } = useCurrency();
   const [wished, setWished] = useState(false);
@@ -52,93 +53,72 @@ export function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg">
-
-      {/* ── Image area — full bleed, no padding ── */}
-      <Link href={`/product/${product.id}`} className="block relative">
-        <div className="w-full aspect-square overflow-hidden bg-muted/20">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
+      className="group flex flex-col bg-card rounded-xl border border-border overflow-hidden hover:shadow-md transition-shadow duration-200"
+    >
+      <Link href={`/product/${product.id}`} className="flex flex-col flex-1">
+        <div className="relative aspect-square bg-muted/30 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
+          <button
+            onClick={handleWish}
+            aria-label="Add to wishlist"
+            className="absolute top-2 right-2 p-2 rounded-full bg-background/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-colors"
+          >
+            <Heart className={`w-4 h-4 ${wished ? "fill-primary text-primary" : ""}`} />
+          </button>
+          {product.discount > 0 && (
+            <span className="absolute top-2 left-2 px-2 py-1 bg-destructive text-destructive-foreground text-xs font-bold rounded-md">
+              -{product.discount}%
+            </span>
+          )}
+          {!product.inStock && (
+            <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
+              <span className="text-xs font-semibold text-foreground/70 border border-border px-3 py-1 rounded-full bg-card">
+                Out of Stock
+              </span>
+            </div>
+          )}
         </div>
 
-        {/* Discount badge — red pill, top-left over image */}
-        {product.discount > 0 && (
-          <span className="absolute top-2.5 left-2.5 z-10 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full leading-tight">
-            -{product.discount}%
-          </span>
-        )}
-
-        {/* Out of stock overlay */}
-        {!product.inStock && (
-          <div className="absolute inset-0 z-10 bg-background/60 flex items-center justify-center">
-            <span className="text-xs font-semibold text-foreground/70 border border-border px-3 py-1 rounded-full bg-card">
-              Out of Stock
-            </span>
-          </div>
-        )}
-      </Link>
-
-      {/* Heart button — circle, top-right over image */}
-      <button
-        onClick={handleWish}
-        aria-label="Add to wishlist"
-        className={cn(
-          "absolute top-2.5 right-2.5 z-20 h-8 w-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm",
-          wished
-            ? "bg-red-500 text-white"
-            : "bg-white/90 dark:bg-white/15 backdrop-blur-sm text-muted-foreground hover:text-red-500"
-        )}
-      >
-        <Heart className={cn("h-4 w-4", wished && "fill-current")} />
-      </button>
-
-      {/* ── Info section ── */}
-      <div className="flex flex-col flex-1 px-3 pt-2.5 pb-3 gap-1.5">
-        <Link href={`/product/${product.id}`} className="block flex-1">
-          {/* Product name */}
-          <h3 className="font-semibold text-[14px] leading-snug text-foreground line-clamp-2 min-h-[2.5rem]">
+        <div className="p-3 flex flex-col flex-1">
+          <h3 className="text-sm font-medium text-foreground line-clamp-2 mb-1 flex-1">
             {product.name}
           </h3>
-
-          {/* Price row */}
-          <div className="flex items-baseline gap-2 mt-1.5 flex-wrap">
-            <span className="font-bold text-[17px] text-foreground">
+          <div className="flex items-baseline gap-2 mb-3">
+            <span className="text-lg font-bold text-foreground">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice > product.price && (
-              <span className="text-[12px] text-muted-foreground line-through">
+              <span className="text-xs text-muted-foreground line-through">
                 {formatPrice(product.originalPrice)}
               </span>
             )}
           </div>
-        </Link>
 
-        {/* Add to Cart button — full width, pill, teal */}
-        <button
-          onClick={handleAddToCart}
-          disabled={!product.inStock}
-          className={cn(
-            "mt-1 w-full h-10 rounded-full text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 active:scale-95",
-            added
-              ? "bg-green-500 text-white"
-              : product.inStock
-              ? "bg-[#1FA89A] hover:bg-[#18978a] text-white"
-              : "bg-muted text-muted-foreground cursor-not-allowed"
-          )}
-        >
-          {added ? (
-            <><Check className="h-4 w-4" /> Added!</>
-          ) : product.inStock ? (
-            <><Plus className="h-4 w-4" /> Add to Cart</>
-          ) : (
-            "Out of Stock"
-          )}
-        </button>
-      </div>
-    </div>
+          <Button
+            onClick={handleAddToCart}
+            variant={added ? "secondary" : "default"}
+            disabled={!product.inStock}
+            className="w-full h-9 text-xs transition-all duration-200"
+          >
+            {added ? (
+              <><Check className="w-3 h-3 mr-1" /> Added!</>
+            ) : product.inStock ? (
+              <><Plus className="w-3 h-3 mr-1" /> Add to Cart</>
+            ) : (
+              "Out of Stock"
+            )}
+          </Button>
+        </div>
+      </Link>
+    </motion.div>
   );
 }
