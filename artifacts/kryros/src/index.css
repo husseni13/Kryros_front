@@ -133,9 +133,9 @@
   --secondary: 0 0% 97%;
   --secondary-foreground: 0 0% 7%;
 
-  /* Muted — soft grey (#F5F5F5), muted text (#767676) */
+  /* Muted — soft grey (#F5F5F5), muted text (#666666) */
   --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 46%;
+  --muted-foreground: 0 0% 40%;
 
   /* Accent — same as primary */
   --accent: 174 69% 39%;
@@ -173,10 +173,10 @@
   --app-font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
   --app-font-display: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
 
-  /* Text scale */
+  /* Text scale — light mode */
   --text-primary:   #111111;
-  --text-secondary: #555555;
-  --text-muted:     #767676;
+  --text-secondary: #666666;
+  --text-muted:     #666666;
   --text-disabled:  #999999;
   --text-link:      #111111;
 
@@ -251,7 +251,7 @@
   --secondary-foreground: 0 0% 100%;
 
   --muted: 214 18% 18%;
-  --muted-foreground: 0 0% 60%;
+  --muted-foreground: 0 0% 73%;
 
   --accent: 174 65% 48%;
   --accent-foreground: 0 0% 7%;
@@ -282,10 +282,10 @@
   --brand-teal-dark: 174 65% 38%;
   --brand-teal-light: 174 65% 62%;
 
-  /* Dark mode text tokens */
+  /* Text scale — dark mode */
   --text-primary:   #ffffff;
-  --text-secondary: #cccccc;
-  --text-muted:     #999999;
+  --text-secondary: #bbbbbb;
+  --text-muted:     #bbbbbb;
   --text-disabled:  #666666;
   --text-link:      #ffffff;
 }
