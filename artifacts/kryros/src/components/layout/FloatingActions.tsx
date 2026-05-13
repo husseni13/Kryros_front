@@ -51,13 +51,13 @@ export function FloatingActions() {
 
       {/* Language picker popup — anchored below the language button */}
       {langOpen && (
-        <div className="absolute top-full mt-2 right-0 w-40 rounded-xl overflow-hidden shadow-2xl border border-white/15 bg-[hsl(180_40%_7%)] animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="absolute top-full mt-2 right-0 w-40 rounded-xl overflow-hidden shadow-2xl border border-border bg-card animate-in fade-in slide-in-from-top-2 duration-150">
           {/* Header with close button */}
-          <div className="flex items-center justify-between px-3 py-2 border-b border-white/10">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Language</span>
+          <div className="flex items-center justify-between px-3 py-2 border-b border-border">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Language</span>
             <button
               onClick={() => setLangOpen(false)}
-              className="h-5 w-5 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-colors"
+              className="h-5 w-5 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             >
               <X className="h-3 w-3" />
             </button>
@@ -69,10 +69,10 @@ export function FloatingActions() {
               key={lang.code}
               onClick={() => { setLanguage(lang); setLangOpen(false); }}
               className={cn(
-                "w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium transition-colors hover:bg-white/10",
+                "w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium transition-colors hover:bg-muted",
                 language.code === lang.code
-                  ? "text-[hsl(38_92%_60%)] bg-white/5"
-                  : "text-white/75"
+                  ? "text-primary bg-primary/5"
+                  : "text-muted-foreground"
               )}
             >
               <Globe className="h-3.5 w-3.5 flex-shrink-0 opacity-50" />
@@ -80,8 +80,8 @@ export function FloatingActions() {
               <span className={cn(
                 "text-[10px] font-bold px-1.5 py-0.5 rounded",
                 language.code === lang.code
-                  ? "bg-[hsl(38_92%_50%)] text-white"
-                  : "opacity-40 text-white"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground"
               )}>{lang.code}</span>
             </button>
           ))}
