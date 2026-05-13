@@ -51,7 +51,7 @@ export function Navbar({ onOpenSidebar }: { onOpenSidebar: () => void }) {
   const shortLabel = selectedCategory === "All Categories" ? "ALL" : selectedCategory.length > 8 ? selectedCategory.slice(0, 8) + "…" : selectedCategory;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/40 shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/40 shadow-sm" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
 
       {/* ── Search Bar — mobile TOP row ── */}
       <div className="md:hidden px-3 pt-2 pb-1">

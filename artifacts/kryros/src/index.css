@@ -321,6 +321,15 @@
     min-height: 100vh;
   }
 
+  html {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+
   h1 {
     font-size: 32px;
     font-weight: 700;
