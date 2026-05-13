@@ -2,6 +2,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const API_BASE = (import.meta.env.VITE_API_URL || "/backend") + "/api";
 
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem("token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 export function useApi() {
   const queryClient = useQueryClient();
 
@@ -10,6 +15,7 @@ export function useApi() {
       ...options,
       headers: {
         "Content-Type": "application/json",
+        ...getAuthHeaders(),
         ...options?.headers,
       },
     });
@@ -38,5 +44,5 @@ export function useApi() {
     });
   };
 
-  return { fetcher, useGet, usePost };
+  return { fetcher, useGet, usePost, queryClient };
 }

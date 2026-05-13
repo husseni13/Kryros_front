@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { House, Store, CreditCard, ShoppingBag, PackageSearch } from "lucide-react";
+import { Home, Search, Heart, ShoppingCart, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/CartContext";
 
@@ -8,11 +8,11 @@ export function BottomNav() {
   const { itemCount } = useCart();
 
   const navItems = [
-    { name: "Home", href: "/", icon: House },
-    { name: "Shop", href: "/shop", icon: Store },
-    { name: "Pay", href: "/checkout", icon: CreditCard },
-    { name: "Cart", href: "/cart", icon: ShoppingBag, badge: itemCount },
-    { name: "Track", href: "/track-order", icon: PackageSearch },
+    { name: "Home",     href: "/",          icon: Home        },
+    { name: "Search",   href: "/shop",       icon: Search      },
+    { name: "Wishlist", href: "/wishlist",   icon: Heart       },
+    { name: "Cart",     href: "/cart",       icon: ShoppingCart, badge: itemCount },
+    { name: "Me",       href: "/dashboard",  icon: User        },
   ];
 
   return (
@@ -39,7 +39,7 @@ export function BottomNav() {
                   </span>
                 )}
               </div>
-              <span className={cn("text-[10px] font-medium uppercase tracking-wide", isActive && "text-primary")}>
+              <span className={cn("text-[10px] font-medium", isActive && "text-primary")}>
                 {item.name}
               </span>
             </Link>

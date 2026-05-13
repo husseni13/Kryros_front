@@ -4,6 +4,7 @@ import { Eye, EyeOff, CheckCircle2, UserPlus, Loader2 } from "lucide-react";
 import { SiGoogle, SiApple } from "react-icons/si";
 import { useApi } from "@/hooks/use-api";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,10 +19,15 @@ export default function RegisterPage() {
   const [, navigate] = useLocation();
   const { usePost } = useApi();
   const { toast } = useToast();
+  const { login } = useAuth();
 
   const registerMutation = usePost("/auth/register", {
     onSuccess: (data: any) => {
-      localStorage.setItem("token", data.token);
+      const token = data.token || data.accessToken || data.access_token;
+      const user = data.user || data.data?.user || data.data;
+      if (token) {
+        login(token, user ? { ...user, firstName, lastName, name: `${firstName} ${lastName}`, email } : { firstName, lastName, name: `${firstName} ${lastName}`, email, id: "" });
+      }
       toast({ title: "Account created!", description: "Welcome to Kryros." });
       navigate("/dashboard");
     },

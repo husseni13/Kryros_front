@@ -4,6 +4,7 @@ import { Eye, EyeOff, Mail, Loader2 } from "lucide-react";
 import { SiGoogle, SiApple } from "react-icons/si";
 import { useApi } from "@/hooks/use-api";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,10 +15,17 @@ export default function LoginPage() {
   const [, navigate] = useLocation();
   const { usePost } = useApi();
   const { toast } = useToast();
+  const { login } = useAuth();
 
   const loginMutation = usePost("/auth/login", {
     onSuccess: (data: any) => {
-      localStorage.setItem("token", data.token);
+      const token = data.token || data.accessToken || data.access_token;
+      const user = data.user || data.data?.user || data.data;
+      if (token) {
+        login(token, user);
+      } else {
+        localStorage.setItem("token", token || "");
+      }
       toast({ title: "Welcome back!", description: "You have successfully logged in." });
       navigate("/dashboard");
     },
@@ -41,10 +49,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-sm">
-        {/* Card — matches newsletter card exactly */}
         <div className="rounded-3xl border border-border bg-card shadow-lg px-6 py-8">
 
-          {/* Icon + Logo */}
           <div className="text-center mb-6">
             <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-background mb-4">
               <Mail className="h-7 w-7 text-primary" strokeWidth={1.5} />
@@ -57,7 +63,6 @@ export default function LoginPage() {
             <p className="mt-1 text-muted-foreground text-sm">Welcome back — sign in to continue</p>
           </div>
 
-          {/* Tab switcher */}
           <div className="flex bg-muted rounded-full p-1 mb-5">
             {(["email", "phone"] as const).map((t) => (
               <button
@@ -147,14 +152,12 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Divider */}
           <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-border" />
             <span className="text-muted-foreground text-[10px] font-medium uppercase tracking-wider">or</span>
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          {/* Social */}
           <div className="grid grid-cols-2 gap-2.5">
             <button onClick={() => navigate("/dashboard")} className="flex items-center justify-center gap-2 h-10 rounded-full border border-border bg-background text-foreground hover:bg-muted text-xs font-semibold transition-all">
               <SiGoogle className="h-3.5 w-3.5" /> Google
