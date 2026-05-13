@@ -178,6 +178,7 @@
   --text-secondary: #555555;
   --text-muted:     #767676;
   --text-disabled:  #999999;
+  --text-link:      #111111;
 
   /* Link colors */
   --link-default: #0654BA;
@@ -280,12 +281,31 @@
   --brand-teal: 174 65% 48%;
   --brand-teal-dark: 174 65% 38%;
   --brand-teal-light: 174 65% 62%;
+
+  /* Dark mode text tokens */
+  --text-primary:   #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted:     #999999;
+  --text-disabled:  #666666;
+  --text-link:      #ffffff;
 }
 
 @layer base {
   * {
     @apply border-border;
     box-sizing: border-box;
+    color: var(--text-primary);
+  }
+
+  a {
+    color: var(--text-link);
+    text-decoration: none;
+  }
+  a:visited {
+    color: var(--text-link);
+  }
+  a:hover {
+    color: var(--primary);
   }
 
   /* ── eBay Typography Base ── */
