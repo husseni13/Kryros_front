@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, Truck, RefreshCw, ShieldCheck, ChevronRight } from "lucide-react";
+import { FaFacebook, FaCcVisa, FaCcMastercard } from "react-icons/fa";
+import { FaXTwitter, FaSquareShareNodes } from "react-icons/fa6";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { PRODUCTS } from "@/lib/mockData";
@@ -260,13 +262,13 @@ export default function ProductDetailPage() {
         <button
           onClick={() => { handleAddToCart(); setLocation("/checkout"); }}
           style={{
-            width: "100%", height: 50, border: `1px solid ${BORDER}`, borderRadius: 16,
-            background: "var(--secondary)", color: "var(--secondary-foreground)", fontSize: 15, fontWeight: 800,
+            width: "100%", height: 50, border: "none", borderRadius: 16,
+            background: "#1C1F26", color: "#FFFFFF", fontSize: 15, fontWeight: 800,
             cursor: "pointer", marginTop: 10,
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             letterSpacing: 0.2,
           }}>
-          ⚡ Buy Now
+          Buy Now
         </button>
 
         {/* Delivery card */}
@@ -335,33 +337,34 @@ export default function ProductDetailPage() {
         {/* Footer: share + payments */}
         <div style={{ marginTop: 26, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
           <div>
-            <div style={{ color: MUTED, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>SHARE</div>
+            <div style={{ color: "#888888", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>SHARE</div>
             <div style={{ display: "flex", gap: 10 }}>
-              {["f", "𝕏", "↗"].map(icon => (
-                <div key={icon} style={{
-                  width: 44, height: 44, borderRadius: "50%",
-                  background: "var(--secondary)", border: `1px solid ${BORDER}`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, cursor: "pointer", color: "var(--foreground)",
-                }}>
-                  {icon}
-                </div>
-              ))}
+              <div onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, "_blank")}
+                style={{ width: 44, height: 44, borderRadius: "50%", background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                <FaFacebook size={20} color="#1877F2" />
+              </div>
+              <div onClick={() => window.open(`https://twitter.com/intent/tweet?url=${window.location.href}`, "_blank")}
+                style={{ width: 44, height: 44, borderRadius: "50%", background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                <FaXTwitter size={18} color="#FFFFFF" />
+              </div>
+              <div onClick={() => { if (navigator.share) { navigator.share({ title: product.name, url: window.location.href }); } else { navigator.clipboard.writeText(window.location.href); } }}
+                style={{ width: 44, height: 44, borderRadius: "50%", background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                <FaSquareShareNodes size={19} color="#20A898" />
+              </div>
             </div>
           </div>
           <div>
-            <div style={{ color: MUTED, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>PAYMENTS</div>
+            <div style={{ color: "#888888", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>PAYMENTS</div>
             <div style={{ display: "flex", gap: 8 }}>
-              {["VISA", "MC", "MTN"].map(p => (
-                <div key={p} style={{
-                  width: 60, height: 44, borderRadius: 14,
-                  background: "var(--secondary)", border: `1px solid ${BORDER}`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontWeight: 700, fontSize: 12, cursor: "pointer", color: "var(--foreground)",
-                }}>
-                  {p}
-                </div>
-              ))}
+              <div style={{ width: 60, height: 44, borderRadius: 14, background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <FaCcVisa size={28} color="#1A1F71" style={{ filter: "drop-shadow(0 0 1px #fff)" }} />
+              </div>
+              <div style={{ width: 60, height: 44, borderRadius: 14, background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <FaCcMastercard size={28} color="#EB001B" />
+              </div>
+              <div style={{ width: 60, height: 44, borderRadius: 14, background: "#FFCC00", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ fontWeight: 900, fontSize: 11, color: "#000000", letterSpacing: -0.5 }}>MTN</span>
+              </div>
             </div>
           </div>
         </div>
