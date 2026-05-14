@@ -9,12 +9,7 @@ import { ProductCard } from "@/components/layout/ProductCard";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
-const BG     = "#101115";
-const CARD   = "#161b21";
-const CARD2  = "#1a2030";
-const TEAL   = "#22D3C5";
-const MUTED  = "#8E9AAF";
-const BORDER = "rgba(255,255,255,0.08)";
+const TEAL = "#22D3C5";
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -67,24 +62,24 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div style={{ background: BG, minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "white" }}>
+    <div style={{ background: "var(--background)", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "var(--foreground)" }}>
 
       {/* Product sub-header */}
       <div style={{
         height: 52, display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 16px", borderBottom: `1px solid ${BORDER}`,
+        padding: "0 16px", borderBottom: "1px solid var(--border)",
         position: "sticky", top: 0, zIndex: 30,
-        background: BG,
+        background: "var(--background)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={() => setLocation("/")}
-            style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: "white", background: "none", border: "none", cursor: "pointer", fontSize: 18 }}>
+            style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--foreground)", background: "none", border: "none", cursor: "pointer", fontSize: 18 }}>
             ←
           </button>
           <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.2 }}>{product.name}</span>
         </div>
         <button onClick={() => setWished(w => !w)}
-          style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: wished ? TEAL : "white", background: "none", border: "none", cursor: "pointer", fontSize: 18 }}>
+          style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: wished ? TEAL : "var(--foreground)", background: "none", border: "none", cursor: "pointer", fontSize: 18 }}>
           {wished ? "♥" : "♡"}
         </button>
       </div>
@@ -93,7 +88,7 @@ export default function ProductDetailPage() {
       <div style={{ maxWidth: 480, margin: "0 auto", padding: "16px 16px 100px" }}>
 
         {/* Main image */}
-        <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", background: "#dfe3e8" }}>
+        <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", background: "var(--muted)" }}>
           <AnimatePresence mode="wait">
             <motion.img
               key={selectedImage}
@@ -126,7 +121,7 @@ export default function ProductDetailPage() {
                 width: 58, height: 58, borderRadius: 14, overflow: "hidden", flexShrink: 0,
                 border: `2px solid ${selectedImage === i ? TEAL : "transparent"}`,
                 boxShadow: selectedImage === i ? `0 0 0 1px rgba(34,211,197,0.2)` : "none",
-                background: CARD2, cursor: "pointer", padding: 0,
+                background: "var(--secondary)", cursor: "pointer", padding: 0,
               }}>
               <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </button>
@@ -139,15 +134,15 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Title */}
-        <div style={{ marginTop: 6, fontSize: 22, lineHeight: "28px", fontWeight: 800, letterSpacing: -0.5 }}>
+        <div style={{ marginTop: 6, fontSize: 22, lineHeight: "28px", fontWeight: 800, letterSpacing: -0.5, color: "var(--foreground)" }}>
           {product.name}
         </div>
 
         {/* Rating */}
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
           <Stars rating={product.rating} />
-          <span style={{ fontSize: 14, fontWeight: 700 }}>{product.rating}</span>
-          <span style={{ fontSize: 14, color: MUTED }}>({product.reviews.toLocaleString()} reviews)</span>
+          <span style={{ fontSize: 14, fontWeight: 700, color: "var(--foreground)" }}>{product.rating}</span>
+          <span style={{ fontSize: 14, color: "var(--muted-foreground)" }}>({product.reviews.toLocaleString()} reviews)</span>
         </div>
 
         {/* Price */}
@@ -156,13 +151,13 @@ export default function ProductDetailPage() {
             {formatPrice(product.price)}
           </div>
           {product.originalPrice > product.price && (
-            <div style={{ fontSize: 16, fontWeight: 500, color: "#A9B4C7", textDecoration: "line-through" }}>
+            <div style={{ fontSize: 16, fontWeight: 500, color: "var(--muted-foreground)", textDecoration: "line-through" }}>
               {formatPrice(product.originalPrice)}
             </div>
           )}
           {product.discount > 0 && (
             <div style={{
-              background: "rgba(127,29,29,0.3)", color: "#EF4444",
+              background: "rgba(127,29,29,0.15)", color: "#EF4444",
               padding: "4px 10px", borderRadius: 999,
               fontSize: 13, fontWeight: 700,
             }}>
@@ -172,14 +167,14 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Description */}
-        <div style={{ marginTop: 16, color: MUTED, fontSize: 14, lineHeight: 1.7, fontWeight: 400 }}>
+        <div style={{ marginTop: 16, color: "var(--muted-foreground)", fontSize: 14, lineHeight: 1.7, fontWeight: 400 }}>
           {product.name} — a flagship product offering premium build quality, cutting-edge performance, and an immersive experience. Available with 0% financing from Kryros.
         </div>
 
         {/* Color */}
         <div style={{ marginTop: 22 }}>
-          <div style={{ fontSize: 15, fontWeight: 700 }}>
-            Color: <span style={{ fontWeight: 400, color: MUTED }}>{colors[selectedColor].label}</span>
+          <div style={{ fontSize: 15, fontWeight: 700, color: "var(--foreground)" }}>
+            Color: <span style={{ fontWeight: 400, color: "var(--muted-foreground)" }}>{colors[selectedColor].label}</span>
           </div>
           <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
             {colors.map((c, i) => (
@@ -197,17 +192,17 @@ export default function ProductDetailPage() {
 
         {/* Storage */}
         <div style={{ marginTop: 20 }}>
-          <div style={{ fontSize: 15, fontWeight: 700 }}>
-            Storage: <span style={{ fontWeight: 400, color: MUTED }}>{selectedStorage}</span>
+          <div style={{ fontSize: 15, fontWeight: 700, color: "var(--foreground)" }}>
+            Storage: <span style={{ fontWeight: 400, color: "var(--muted-foreground)" }}>{selectedStorage}</span>
           </div>
           <div style={{ display: "flex", gap: 10, marginTop: 12, flexWrap: "wrap" }}>
             {storages.map(size => (
               <button key={size} onClick={() => setSelectedStorage(size)}
                 style={{
                   height: 44, padding: "0 18px", borderRadius: 14,
-                  border: `1px solid ${selectedStorage === size ? "transparent" : BORDER}`,
-                  background: selectedStorage === size ? TEAL : CARD,
-                  color: selectedStorage === size ? "#000" : "white",
+                  border: `1px solid ${selectedStorage === size ? "transparent" : "var(--border)"}`,
+                  background: selectedStorage === size ? TEAL : "var(--card)",
+                  color: selectedStorage === size ? "#000" : "var(--card-foreground)",
                   fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.15s",
                 }}>
                 {size}
@@ -220,17 +215,17 @@ export default function ProductDetailPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 22 }}>
           {/* Qty */}
           <div style={{
-            width: 110, height: 48, borderRadius: 16, border: `1px solid ${BORDER}`,
-            background: CARD, display: "flex", alignItems: "center", justifyContent: "space-around",
+            width: 110, height: 48, borderRadius: 16, border: "1px solid var(--border)",
+            background: "var(--card)", display: "flex", alignItems: "center", justifyContent: "space-around",
             fontSize: 17, fontWeight: 700,
           }}>
             <button onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              style={{ background: "none", border: "none", color: "white", cursor: "pointer", fontSize: 18, padding: "0 10px", height: "100%" }}>
+              style={{ background: "none", border: "none", color: "var(--foreground)", cursor: "pointer", fontSize: 18, padding: "0 10px", height: "100%" }}>
               −
             </button>
-            <span style={{ minWidth: 22, textAlign: "center", fontSize: 15 }}>{quantity}</span>
+            <span style={{ minWidth: 22, textAlign: "center", fontSize: 15, color: "var(--foreground)" }}>{quantity}</span>
             <button onClick={() => setQuantity(quantity + 1)}
-              style={{ background: "none", border: "none", color: "white", cursor: "pointer", fontSize: 18, padding: "0 10px", height: "100%" }}>
+              style={{ background: "none", border: "none", color: "var(--foreground)", cursor: "pointer", fontSize: 18, padding: "0 10px", height: "100%" }}>
               +
             </button>
           </div>
@@ -251,9 +246,9 @@ export default function ProductDetailPage() {
           {/* Wishlist */}
           <button onClick={() => setWished(w => !w)}
             style={{
-              width: 48, height: 48, borderRadius: 16, border: `1px solid ${BORDER}`,
-              background: CARD, display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 20, cursor: "pointer", color: wished ? TEAL : "white",
+              width: 48, height: 48, borderRadius: 16, border: "1px solid var(--border)",
+              background: "var(--card)", display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 20, cursor: "pointer", color: wished ? TEAL : "var(--foreground)",
             }}>
             {wished ? "♥" : "♡"}
           </button>
@@ -263,8 +258,8 @@ export default function ProductDetailPage() {
         <button
           onClick={() => { handleAddToCart(); setLocation("/checkout"); }}
           style={{
-            width: "100%", height: 50, border: "none", borderRadius: 16,
-            background: "white", color: "#000", fontSize: 15, fontWeight: 800,
+            width: "100%", height: 50, border: "1px solid var(--border)", borderRadius: 16,
+            background: "var(--secondary)", color: "var(--secondary-foreground)", fontSize: 15, fontWeight: 800,
             cursor: "pointer", marginTop: 10,
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             letterSpacing: 0.2,
@@ -274,26 +269,26 @@ export default function ProductDetailPage() {
 
         {/* BNPL */}
         <div style={{
-          marginTop: 14, background: CARD, border: `1px solid ${BORDER}`,
+          marginTop: 14, background: "var(--card)", border: "1px solid var(--card-border)",
           borderRadius: 16, padding: "14px 16px",
           display: "flex", alignItems: "center", gap: 10,
         }}>
           <Zap size={16} color={TEAL} strokeWidth={2.5} />
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700 }}>Pay with Kryros BNPL</div>
-            <div style={{ fontSize: 13, color: MUTED, marginTop: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "var(--card-foreground)" }}>Pay with Kryros BNPL</div>
+            <div style={{ fontSize: 13, color: "var(--muted-foreground)", marginTop: 1 }}>
               From {formatPrice(Math.round(product.price / 12))}/mo — 0% interest
             </div>
           </div>
         </div>
 
         {/* Delivery card */}
-        <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 14, background: "var(--card)", border: "1px solid var(--card-border)", borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
             <Truck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700 }}>Delivery</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Delivery</span>
           </div>
-          <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginBottom: 10 }}>
             Free standard shipping on orders over $35.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -305,23 +300,23 @@ export default function ProductDetailPage() {
               <div key={row.label} style={{
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 padding: "10px 0",
-                borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
+                borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none",
               }}>
-                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66 }}>{row.label}</span>
-                <span style={{ fontSize: 13, color: MUTED, flex: 1 }}>{row.time}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "var(--card-foreground)" }}>{row.label}</span>
+                <span style={{ fontSize: 13, color: "var(--muted-foreground)", flex: 1 }}>{row.time}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "var(--card-foreground)" }}>{row.cost}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Returns card */}
-        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 10, background: "var(--card)", border: "1px solid var(--card-border)", borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <RefreshCw size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700 }}>Returns</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Returns</span>
           </div>
-          <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginBottom: 10 }}>
             You have 60 days to return the item.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -329,8 +324,8 @@ export default function ProductDetailPage() {
               <div key={item} style={{
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "10px 0",
-                borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
-                fontSize: 13,
+                borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none",
+                fontSize: 13, color: "var(--card-foreground)",
               }}>
                 <ChevronRight size={14} color={TEAL} strokeWidth={2.5} />
                 {item}
@@ -340,12 +335,12 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Warranty card */}
-        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 10, background: "var(--card)", border: "1px solid var(--card-border)", borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <ShieldCheck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700 }}>Warranty</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Warranty</span>
           </div>
-          <div style={{ fontSize: 13, color: MUTED }}>
+          <div style={{ fontSize: 13, color: "var(--muted-foreground)" }}>
             1 Year Official Warranty · Accidental damage cover for 6 months.
           </div>
         </div>
@@ -353,14 +348,14 @@ export default function ProductDetailPage() {
         {/* Footer: share + payments */}
         <div style={{ marginTop: 26, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
           <div>
-            <div style={{ color: MUTED, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>SHARE</div>
+            <div style={{ color: "var(--muted-foreground)", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>SHARE</div>
             <div style={{ display: "flex", gap: 10 }}>
               {["f", "𝕏", "↗"].map(icon => (
                 <div key={icon} style={{
                   width: 44, height: 44, borderRadius: "50%",
-                  background: CARD2, border: `1px solid ${BORDER}`,
+                  background: "var(--secondary)", border: "1px solid var(--border)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, cursor: "pointer",
+                  fontSize: 16, cursor: "pointer", color: "var(--foreground)",
                 }}>
                   {icon}
                 </div>
@@ -368,14 +363,14 @@ export default function ProductDetailPage() {
             </div>
           </div>
           <div>
-            <div style={{ color: MUTED, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>PAYMENTS</div>
+            <div style={{ color: "var(--muted-foreground)", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>PAYMENTS</div>
             <div style={{ display: "flex", gap: 8 }}>
               {["VISA", "MC", "MTN"].map(p => (
                 <div key={p} style={{
                   width: 60, height: 44, borderRadius: 14,
-                  background: CARD2, border: `1px solid ${BORDER}`,
+                  background: "var(--secondary)", border: "1px solid var(--border)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontWeight: 700, fontSize: 12, cursor: "pointer",
+                  fontWeight: 700, fontSize: 12, cursor: "pointer", color: "var(--foreground)",
                 }}>
                   {p}
                 </div>
@@ -386,7 +381,7 @@ export default function ProductDetailPage() {
 
         {/* You may also like */}
         <div style={{ marginTop: 32 }}>
-          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 14 }}>You May Also Like</div>
+          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 14, color: "var(--foreground)" }}>You May Also Like</div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             {PRODUCTS.slice(1, 5).map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} />

@@ -22,7 +22,6 @@ type Product = {
   badge?: string | null;
 };
 
-const CARD_BG   = "#161b21";
 const BTN_TEAL  = "#1FA89A";
 const BTN_HOVER = "#178a7e";
 
@@ -62,12 +61,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
       style={{
-        background: CARD_BG,
+        background: "var(--card)",
         borderRadius: 20,
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         fontFamily: "'Inter', sans-serif",
+        border: "1px solid var(--card-border)",
       }}
     >
       <Link href={`/product/${product.id}`} style={{ display: "flex", flexDirection: "column", flex: 1, textDecoration: "none" }}>
@@ -100,7 +100,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             style={{
               position: "absolute", top: 10, right: 10,
               width: 36, height: 36, borderRadius: "50%",
-              background: "rgba(30,30,30,0.75)",
+              background: "rgba(0,0,0,0.45)",
               border: "none", cursor: "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
               color: wished ? BTN_TEAL : "white",
@@ -120,7 +120,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               <span style={{
                 fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.7)",
                 border: "1px solid rgba(255,255,255,0.2)",
-                padding: "4px 12px", borderRadius: 999, background: CARD_BG,
+                padding: "4px 12px", borderRadius: 999, background: "var(--card)",
               }}>Out of Stock</span>
             </div>
           )}
@@ -129,9 +129,9 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         {/* Info */}
         <div style={{ padding: "12px 12px 14px", display: "flex", flexDirection: "column", gap: 6 }}>
 
-          {/* Product name — max 2 lines, ellipsis for overflow */}
+          {/* Product name */}
           <div style={{
-            fontSize: 15, fontWeight: 700, color: "white", lineHeight: 1.35,
+            fontSize: 15, fontWeight: 700, color: "var(--card-foreground)", lineHeight: 1.35,
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
@@ -142,11 +142,11 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
 
           {/* Price row */}
           <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-            <span style={{ fontSize: 20, fontWeight: 800, color: "white" }}>
+            <span style={{ fontSize: 20, fontWeight: 800, color: "var(--card-foreground)" }}>
               {formatPrice(product.price)}
             </span>
             {product.originalPrice > product.price && (
-              <span style={{ fontSize: 13, color: "#7A8899", textDecoration: "line-through", fontWeight: 500 }}>
+              <span style={{ fontSize: 13, color: "var(--muted-foreground)", textDecoration: "line-through", fontWeight: 500 }}>
                 {formatPrice(product.originalPrice)}
               </span>
             )}
