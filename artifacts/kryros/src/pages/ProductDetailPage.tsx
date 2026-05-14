@@ -8,13 +8,12 @@ import { ProductCard } from "@/components/layout/ProductCard";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
-const BG     = "#050816";
-const CARD   = "#1a2535";
-const CARD2  = "#1e2a3a";
-const ROW    = "#243347";
+const BG     = "#161b21";
+const CARD   = "#101115";
+const CARD2  = "#111318";
 const TEAL   = "#22D3C5";
 const MUTED  = "#8E9AAF";
-const BORDER = "rgba(255,255,255,0.10)";
+const BORDER = "rgba(255,255,255,0.08)";
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -283,20 +282,20 @@ export default function ProductDetailPage() {
           <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
             Free standard shipping on orders over $35.
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             {[
               { label: "Standard", time: "1–4 business days", cost: "$4.50",  free: false },
               { label: "Express",  time: "1 business day",    cost: "$10.00", free: false },
               { label: "Pickup",   time: "1–3 business days", cost: "Free",   free: true  },
-            ].map(row => (
+            ].map((row, i, arr) => (
               <div key={row.label} style={{
                 display: "flex", justifyContent: "space-between", alignItems: "center",
-                background: ROW, borderRadius: 10,
-                padding: "9px 12px",
+                padding: "10px 0",
+                borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
               }}>
-                <span style={{ fontSize: 12, fontWeight: 700, minWidth: 62 }}>{row.label}</span>
-                <span style={{ fontSize: 12, color: MUTED, flex: 1 }}>{row.time}</span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66 }}>{row.label}</span>
+                <span style={{ fontSize: 13, color: MUTED, flex: 1 }}>{row.time}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</span>
               </div>
             ))}
           </div>
@@ -311,14 +310,15 @@ export default function ProductDetailPage() {
           <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
             You have 60 days to return the item.
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            {["Free store return", "Free returns via USPS Dropoff"].map(item => (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {["Free store return", "Free returns via USPS Dropoff"].map((item, i, arr) => (
               <div key={item} style={{
                 display: "flex", alignItems: "center", gap: 8,
-                background: ROW, borderRadius: 10, padding: "9px 12px",
-                fontSize: 12,
+                padding: "10px 0",
+                borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
+                fontSize: 13,
               }}>
-                <span style={{ color: TEAL, fontSize: 13, fontWeight: 700 }}>›</span>
+                <span style={{ color: TEAL, fontSize: 14, fontWeight: 700 }}>›</span>
                 {item}
               </div>
             ))}
@@ -331,10 +331,7 @@ export default function ProductDetailPage() {
             <span style={{ color: TEAL, fontSize: 15 }}>🛡</span>
             <span style={{ fontSize: 13, fontWeight: 700 }}>Warranty</span>
           </div>
-          <div style={{
-            background: ROW, borderRadius: 10, padding: "9px 12px",
-            fontSize: 12, color: MUTED,
-          }}>
+          <div style={{ fontSize: 13, color: MUTED }}>
             1 Year Official Warranty · Accidental damage cover for 6 months.
           </div>
         </div>
