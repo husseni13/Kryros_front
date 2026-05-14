@@ -204,7 +204,7 @@ export default function ProductDetailPage() {
                 style={{
                   height: 44, padding: "0 18px", borderRadius: 14,
                   border: `1px solid ${selectedStorage === size ? "transparent" : BORDER}`,
-                  background: selectedStorage === size ? TEAL : "#15171D",
+                  background: selectedStorage === size ? TEAL : "var(--secondary)",
                   color: selectedStorage === size ? "#000" : "var(--card-foreground)",
                   fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.15s",
                 }}>
@@ -250,7 +250,7 @@ export default function ProductDetailPage() {
           <button onClick={() => setWished(w => !w)}
             style={{
               width: 48, height: 48, borderRadius: 16, border: `1px solid ${BORDER}`,
-              background: "#15171D", display: "flex", alignItems: "center", justifyContent: "center",
+              background: "var(--card)", display: "flex", alignItems: "center", justifyContent: "center",
               cursor: "pointer",
             }}>
             <Heart size={20} color={wished ? TEAL : "var(--foreground)"} fill={wished ? TEAL : "none"} strokeWidth={2} />
@@ -262,7 +262,7 @@ export default function ProductDetailPage() {
           onClick={() => { handleAddToCart(); setLocation("/checkout"); }}
           style={{
             width: "100%", height: 50, border: "none", borderRadius: 16,
-            background: "#1C1F26", color: "#FFFFFF", fontSize: 15, fontWeight: 800,
+            background: "var(--card)", color: "var(--card-foreground)", fontSize: 15, fontWeight: 800,
             cursor: "pointer", marginTop: 10,
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             letterSpacing: 0.2,
@@ -271,12 +271,12 @@ export default function ProductDetailPage() {
         </button>
 
         {/* Delivery card */}
-        <div style={{ marginTop: 14, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 14, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
             <Truck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>Delivery</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Delivery</span>
           </div>
-          <div style={{ fontSize: 12, color: "#888888", marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginBottom: 10 }}>
             Free standard shipping on orders over $35.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -290,21 +290,21 @@ export default function ProductDetailPage() {
                 padding: "10px 0",
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
               }}>
-                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "#FFFFFF" }}>{row.label}</span>
-                <span style={{ fontSize: 13, color: "#888888", flex: 1 }}>{row.time}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "#FFFFFF" }}>{row.cost}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "var(--card-foreground)" }}>{row.label}</span>
+                <span style={{ fontSize: 13, color: "var(--muted-foreground)", flex: 1 }}>{row.time}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "var(--card-foreground)" }}>{row.cost}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Returns card */}
-        <div style={{ marginTop: 10, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 10, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <RefreshCw size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>Returns</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Returns</span>
           </div>
-          <div style={{ fontSize: 12, color: "#888888", marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginBottom: 10 }}>
             You have 60 days to return the item.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -313,7 +313,7 @@ export default function ProductDetailPage() {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "10px 0",
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
-                fontSize: 13, color: "#FFFFFF",
+                fontSize: 13, color: "var(--card-foreground)",
               }}>
                 <ChevronRight size={14} color={TEAL} strokeWidth={2.5} />
                 {item}
@@ -328,15 +328,15 @@ export default function ProductDetailPage() {
             <div style={{ color: "#888888", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>SHARE</div>
             <div style={{ display: "flex", gap: 10 }}>
               <div onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, "_blank")}
-                style={{ width: 44, height: 44, borderRadius: "50%", background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--card)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
                 <FaFacebook size={20} color="#1877F2" />
               </div>
               <div onClick={() => window.open(`https://twitter.com/intent/tweet?url=${window.location.href}`, "_blank")}
-                style={{ width: 44, height: 44, borderRadius: "50%", background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
-                <FaXTwitter size={18} color="#FFFFFF" />
+                style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--card)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                <FaXTwitter size={18} color="var(--foreground)" />
               </div>
               <div onClick={() => { if (navigator.share) { navigator.share({ title: product.name, url: window.location.href }); } else { navigator.clipboard.writeText(window.location.href); } }}
-                style={{ width: 44, height: 44, borderRadius: "50%", background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--card)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
                 <FaSquareShareNodes size={19} color="#20A898" />
               </div>
             </div>
