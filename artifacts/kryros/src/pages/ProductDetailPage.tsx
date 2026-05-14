@@ -8,9 +8,9 @@ import { ProductCard } from "@/components/layout/ProductCard";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
-const BG     = "#161b21";
-const CARD   = "#101115";
-const CARD2  = "#111318";
+const BG     = "#101115";
+const CARD   = "#161b21";
+const CARD2  = "#1a2030";
 const TEAL   = "#22D3C5";
 const MUTED  = "#8E9AAF";
 const BORDER = "rgba(255,255,255,0.08)";
