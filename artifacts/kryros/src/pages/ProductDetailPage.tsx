@@ -204,7 +204,7 @@ export default function ProductDetailPage() {
                 style={{
                   height: 44, padding: "0 18px", borderRadius: 14,
                   border: `1px solid ${selectedStorage === size ? "transparent" : BORDER}`,
-                  background: selectedStorage === size ? TEAL : "var(--secondary)",
+                  background: selectedStorage === size ? TEAL : "var(--card)",
                   color: selectedStorage === size ? "#000" : "var(--card-foreground)",
                   fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.15s",
                 }}>
