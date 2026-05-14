@@ -9,12 +9,12 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
 const BG     = "#050816";
-const CARD   = "#0D1B2A";
-const CARD2  = "#0F1F2E";
-const ROW    = "#182638";
+const CARD   = "#1a2535";
+const CARD2  = "#1e2a3a";
+const ROW    = "#243347";
 const TEAL   = "#22D3C5";
 const MUTED  = "#8E9AAF";
-const BORDER = "rgba(255,255,255,0.08)";
+const BORDER = "rgba(255,255,255,0.10)";
 
 function Stars({ rating }: { rating: number }) {
   return (
