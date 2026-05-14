@@ -5,9 +5,7 @@ import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { PRODUCTS } from "@/lib/mockData";
 import { ProductCard } from "@/components/layout/ProductCard";
-import { Navbar } from "@/components/layout/Navbar";
 import { BottomNav } from "@/components/layout/BottomNav";
-import { Sidebar } from "@/components/layout/Sidebar";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
 const BG    = "#050816";
@@ -41,7 +39,6 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [wished, setWished] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const colors = [
     { label: "Natural", hex: "#b4b2af" },
@@ -70,14 +67,12 @@ export default function ProductDetailPage() {
 
   return (
     <div style={{ background: BG, minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "white" }}>
-      <Navbar onOpenSidebar={() => setSidebarOpen(true)} />
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Product sub-header */}
       <div style={{
         height: 52, display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 16px", borderBottom: `1px solid ${BORDER}`,
-        position: "sticky", top: "var(--navbar-height, 88px)", zIndex: 30,
+        position: "sticky", top: 0, zIndex: 30,
         background: BG,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -279,58 +274,52 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Delivery card */}
-        <div style={{ marginTop: 18, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 20, padding: 18 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ color: TEAL, fontSize: 18 }}>🚚</span>
-            <span style={{ fontSize: 16, fontWeight: 700 }}>Delivery</span>
-          </div>
-          <div style={{ marginTop: 10, color: MUTED, fontSize: 13, lineHeight: 1.6 }}>
-            Free standard shipping on orders over $35.
+        <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "14px 14px 6px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+            <span style={{ color: TEAL, fontSize: 15 }}>🚚</span>
+            <span style={{ fontSize: 13, fontWeight: 700 }}>Delivery</span>
+            <span style={{ fontSize: 12, color: MUTED, marginLeft: 4 }}>Free on orders over $35</span>
           </div>
           {[
-            { label: "Standard", time: "3–5 business days", cost: "$4.50",  free: false },
-            { label: "Express",  time: "1–2 business days", cost: "$10.00", free: false },
-            { label: "Pickup",   time: "1–3 business days", cost: "Free",   free: true  },
+            { label: "Standard", time: "3–5 days", cost: "$4.50",  free: false },
+            { label: "Express",  time: "1–2 days", cost: "$10.00", free: false },
+            { label: "Pickup",   time: "1–3 days", cost: "Free",   free: true  },
           ].map((row, i, arr) => (
             <div key={row.label} style={{
-              display: "flex", justifyContent: "space-between", alignItems: "flex-start",
-              padding: "12px 0",
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "8px 0",
               borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
             }}>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 700 }}>{row.label}</div>
-                <div style={{ fontSize: 13, color: MUTED, marginTop: 1 }}>{row.time}</div>
+              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <span style={{ fontSize: 12, fontWeight: 700, minWidth: 56 }}>{row.label}</span>
+                <span style={{ fontSize: 12, color: MUTED }}>{row.time}</span>
               </div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</div>
+              <span style={{ fontSize: 12, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</span>
             </div>
           ))}
         </div>
 
         {/* Returns card */}
-        <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 20, padding: 18 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ color: TEAL, fontSize: 18 }}>↻</span>
-            <span style={{ fontSize: 16, fontWeight: 700 }}>Returns</span>
-          </div>
-          <div style={{ marginTop: 10, color: MUTED, fontSize: 13, lineHeight: 1.6 }}>
-            You have 60 days to return the item.
+        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "14px 14px 10px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <span style={{ color: TEAL, fontSize: 15 }}>↻</span>
+            <span style={{ fontSize: 13, fontWeight: 700 }}>Returns</span>
+            <span style={{ fontSize: 12, color: MUTED, marginLeft: 4 }}>60-day window</span>
           </div>
           {["Free store return", "Free returns via courier dropoff"].map(item => (
-            <div key={item} style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10, fontSize: 14 }}>
-              <span style={{ color: TEAL, fontSize: 15 }}>›</span>
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6, fontSize: 12, color: MUTED }}>
+              <span style={{ color: TEAL, fontSize: 13 }}>›</span>
               {item}
             </div>
           ))}
         </div>
 
         {/* Warranty card */}
-        <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 20, padding: 18 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ color: TEAL, fontSize: 18 }}>🛡</span>
-            <span style={{ fontSize: 16, fontWeight: 700 }}>Warranty</span>
-          </div>
-          <div style={{ marginTop: 10, color: MUTED, fontSize: 13, lineHeight: 1.6 }}>
-            1 Year Official Warranty. Includes accidental damage protection for 6 months.
+        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "14px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ color: TEAL, fontSize: 15 }}>🛡</span>
+            <span style={{ fontSize: 13, fontWeight: 700 }}>Warranty</span>
+            <span style={{ fontSize: 12, color: MUTED, marginLeft: 4 }}>1 Year · Accidental cover 6mo</span>
           </div>
         </div>
 
