@@ -11,7 +11,7 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
 const TEAL   = "#20A898";
-const MUTED  = "var(--muted-foreground)";
+const MUTED  = "#8e9aaf";
 const BORDER = "var(--border)";
 
 function Stars({ rating }: { rating: number }) {
