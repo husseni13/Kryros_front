@@ -8,12 +8,12 @@ import { ProductCard } from "@/components/layout/ProductCard";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
-const BG    = "#050816";
-const CARD  = "#0D1523";
-const CARD2 = "#101826";
-const TEAL  = "#22D3C5";
-const MUTED = "#8E9AAF";
-const BORDER = "rgba(255,255,255,0.07)";
+const BG     = "#050816";
+const CARD   = "#0D1B2A";
+const CARD2  = "#0F1F2E";
+const TEAL   = "#22D3C5";
+const MUTED  = "#8E9AAF";
+const BORDER = "rgba(255,255,255,0.08)";
 
 function Stars({ rating }: { rating: number }) {
   return (
