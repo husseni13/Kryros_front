@@ -239,7 +239,7 @@ export default function ProductDetailPage() {
           <button onClick={handleAddToCart}
             style={{
               flex: 1, height: 48, border: "none", borderRadius: 16,
-              background: isAdding ? "#1a9990" : TEAL,
+              background: isAdding ? "#178a7e" : "#1FA89A",
               color: "white", fontSize: 15, fontWeight: 700, cursor: "pointer",
               boxShadow: "0 8px 20px rgba(34,211,197,0.18)",
               display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
