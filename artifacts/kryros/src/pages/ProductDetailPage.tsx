@@ -342,16 +342,16 @@ export default function ProductDetailPage() {
             </div>
           </div>
           <div>
-            <div style={{ color: MUTED, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>PAYMENTS</div>
-            <div style={{ display: "flex", gap: 8 }}>
-              <div style={{ width: 64, height: 44, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER}` }}>
-                <img src="/logos/mtn.svg" alt="MTN" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div style={{ color: MUTED, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>ACCEPTED PAYMENTS</div>
+            <div style={{ display: "flex", gap: 10 }}>
+              <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--card)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                <img src="/logos/mtn.svg" alt="MTN" style={{ width: 28, height: 28, objectFit: "contain" }} />
               </div>
-              <div style={{ width: 64, height: 44, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER}` }}>
-                <img src="/logos/airtel.svg" alt="Airtel" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--card)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                <img src="/logos/airtel.svg" alt="Airtel" style={{ width: 28, height: 28, objectFit: "contain" }} />
               </div>
-              <div style={{ width: 64, height: 44, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER}` }}>
-                <img src="/logos/zamtel.svg" alt="Zamtel" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--card)", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                <img src="/logos/zamtel.svg" alt="Zamtel" style={{ width: 28, height: 28, objectFit: "contain" }} />
               </div>
             </div>
           </div>
