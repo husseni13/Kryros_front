@@ -285,12 +285,12 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Delivery card */}
-        <div style={{ marginTop: 14, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 14, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
             <Truck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Delivery</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>Delivery</span>
           </div>
-          <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "#888888", marginBottom: 10 }}>
             Free standard shipping on orders over $35.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -304,21 +304,21 @@ export default function ProductDetailPage() {
                 padding: "10px 0",
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
               }}>
-                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "var(--card-foreground)" }}>{row.label}</span>
-                <span style={{ fontSize: 13, color: MUTED, flex: 1 }}>{row.time}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "var(--card-foreground)" }}>{row.cost}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "#FFFFFF" }}>{row.label}</span>
+                <span style={{ fontSize: 13, color: "#888888", flex: 1 }}>{row.time}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "#FFFFFF" }}>{row.cost}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Returns card */}
-        <div style={{ marginTop: 10, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 10, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <RefreshCw size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Returns</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>Returns</span>
           </div>
-          <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "#888888", marginBottom: 10 }}>
             You have 60 days to return the item.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -327,7 +327,7 @@ export default function ProductDetailPage() {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "10px 0",
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
-                fontSize: 13, color: "var(--card-foreground)",
+                fontSize: 13, color: "#FFFFFF",
               }}>
                 <ChevronRight size={14} color={TEAL} strokeWidth={2.5} />
                 {item}
@@ -337,12 +337,12 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Warranty card */}
-        <div style={{ marginTop: 10, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
+        <div style={{ marginTop: 10, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <ShieldCheck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Warranty</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>Warranty</span>
           </div>
-          <div style={{ fontSize: 13, color: MUTED }}>
+          <div style={{ fontSize: 13, color: "#888888" }}>
             1 Year Official Warranty · Accidental damage cover for 6 months.
           </div>
         </div>
