@@ -136,7 +136,6 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
-            minHeight: "2.7em",
           }}>
             {product.name}
           </div>

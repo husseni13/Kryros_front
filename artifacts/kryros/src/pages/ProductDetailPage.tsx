@@ -259,6 +259,19 @@ export default function ProductDetailPage() {
           </button>
         </div>
 
+        {/* Buy Now */}
+        <button
+          onClick={() => { handleAddToCart(); setLocation("/checkout"); }}
+          style={{
+            width: "100%", height: 50, border: "none", borderRadius: 16,
+            background: "white", color: "#000", fontSize: 15, fontWeight: 800,
+            cursor: "pointer", marginTop: 10,
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            letterSpacing: 0.2,
+          }}>
+          ⚡ Buy Now
+        </button>
+
         {/* BNPL */}
         <div style={{
           marginTop: 14, background: CARD, border: `1px solid ${BORDER}`,
