@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Truck, RefreshCw, ShieldCheck, ChevronRight, Heart } from "lucide-react";
-import { FaFacebook, FaCcVisa, FaCcMastercard } from "react-icons/fa";
+import { ShoppingCart, Truck, RefreshCw, ChevronRight, Heart } from "lucide-react";
+import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter, FaSquareShareNodes } from "react-icons/fa6";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
@@ -344,14 +344,14 @@ export default function ProductDetailPage() {
           <div>
             <div style={{ color: "#888888", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 10 }}>PAYMENTS</div>
             <div style={{ display: "flex", gap: 8 }}>
-              <div style={{ width: 60, height: 44, borderRadius: 14, background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <FaCcVisa size={28} color="#1A1F71" style={{ filter: "drop-shadow(0 0 1px #fff)" }} />
+              <div style={{ width: 64, height: 44, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER}` }}>
+                <img src="/logos/mtn.svg" alt="MTN" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
-              <div style={{ width: 60, height: 44, borderRadius: 14, background: "#1C1F26", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <FaCcMastercard size={28} color="#EB001B" />
+              <div style={{ width: 64, height: 44, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER}` }}>
+                <img src="/logos/airtel.svg" alt="Airtel" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
-              <div style={{ width: 60, height: 44, borderRadius: 14, background: "#FFCC00", border: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ fontWeight: 900, fontSize: 11, color: "#000000", letterSpacing: -0.5 }}>MTN</span>
+              <div style={{ width: 64, height: 44, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER}` }}>
+                <img src="/logos/zamtel.svg" alt="Zamtel" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
             </div>
           </div>
