@@ -68,10 +68,9 @@ export default defineConfig({
     },
     proxy: {
       "/backend": {
-        target: "https://kryrosbackend-rwb2.onrender.com",
+        target: "http://localhost:3000",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/backend/, ""),
-        secure: false,
       },
     },
   },
