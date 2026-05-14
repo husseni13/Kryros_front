@@ -64,14 +64,14 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div style={{ background: "var(--background)", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "var(--foreground)" }}>
+    <div style={{ background: "var(--product-page-bg)", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "var(--foreground)" }}>
 
       {/* Product sub-header */}
       <div style={{
         height: 52, display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 16px", borderBottom: `1px solid ${BORDER}`,
         position: "sticky", top: 0, zIndex: 30,
-        background: "var(--background)",
+        background: "var(--product-page-bg)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={() => setLocation("/")}
