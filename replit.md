@@ -50,8 +50,8 @@ Kryros is a Zambian e-commerce marketplace app where users can shop for products
 
 ## User preferences
 
-- Dark mode background: pure black (`#000000`)
-- Light mode background: pure white (`#ffffff`)
+- Dark mode background: `#101115` (matches `--product-page-bg` dark)
+- Light mode background: `#f4f6f8` (matches `--product-page-bg` light)
 - Font: Inter, size 17px base, weight 500 (medium-bold) for body text
 - All theme changes must be made in `artifacts/kryros/src/index.css` CSS variables only
 
