@@ -2,48 +2,31 @@ import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowLeft,
-  Heart,
-  ShoppingCart,
-  Star,
-  Truck,
-  RefreshCw,
-  Facebook,
-  Twitter,
-  Share2,
-  Minus,
-  Plus,
-  ChevronRight,
-  Zap,
-  ShieldCheck,
-  Check,
+  ArrowLeft, Heart, ShoppingCart, Star, Truck, RefreshCw,
+  Facebook, Twitter, Share2, Minus, Plus, ChevronRight,
+  Zap, ShieldCheck, Check,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { FloatingActions } from "@/components/layout/FloatingActions";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { PRODUCTS } from "@/lib/mockData";
 import { ProductCard } from "@/components/layout/ProductCard";
 
-function StarRating({ rating }: { rating: number }) {
+const BG   = "#050816";
+const CARD = "#0D1523";
+const CARD2 = "#101826";
+const TEAL = "#22D3C5";
+const MUTED = "#8E9AAF";
+const BORDER = "rgba(255,255,255,0.07)";
+
+function Stars({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-1">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <Star
-          key={star}
-          className={`w-4 h-4 ${
-            star <= Math.floor(rating)
-              ? "fill-yellow-400 text-yellow-400"
-              : star - 0.5 <= rating
-              ? "fill-yellow-400/50 text-yellow-400"
-              : "text-muted-foreground"
-          }`}
-        />
+    <div style={{ display: "flex", gap: 4, color: "#FFC107", fontSize: 22 }}>
+      {[1,2,3,4,5].map(s => (
+        <span key={s} style={{ opacity: s <= Math.round(rating) ? 1 : 0.25 }}>★</span>
       ))}
     </div>
   );
@@ -60,25 +43,18 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedStorage, setSelectedStorage] = useState("256GB");
   const [selectedColor, setSelectedColor] = useState(0);
-  const [selectedPlan, setSelectedPlan] = useState("12mo");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [wished, setWished] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const colors = [
-    { label: "Natural Titanium", hex: "#b4b2af" },
-    { label: "Blue Titanium",    hex: "#2b2d36" },
-    { label: "White Titanium",   hex: "#f3f2ee" },
-    { label: "Black Titanium",   hex: "#1e1e1e" },
+    { label: "Natural", hex: "#b4b2af" },
+    { label: "Dark",    hex: "#2B2F39" },
+    { label: "White",   hex: "#f3f2ee" },
+    { label: "Black",   hex: "#1e1e1e" },
   ];
   const storages = ["256GB", "512GB", "1TB"];
-  const plans = [
-    { months: "12mo", amount: Math.round(product.price / 12) },
-    { months: "6mo",  amount: Math.round(product.price / 6) },
-    { months: "4mo",  amount: Math.round(product.price / 4) },
-  ];
-
   const gallery = [product.image, product.image, product.image, product.image];
 
   const handleAddToCart = () => {
@@ -98,393 +74,314 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen pb-16 md:pb-0 bg-background">
+    <div style={{ background: BG, minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "white" }}>
       <Navbar onOpenSidebar={() => setSidebarOpen(true)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Back header */}
-      <div className="sticky top-16 z-30 bg-card border-b border-border px-4 py-3 flex items-center gap-3">
-        <button
-          onClick={() => setLocation("/")}
-          className="p-2 rounded-full hover:bg-muted transition-colors text-foreground"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <span className="font-semibold text-foreground flex-1 truncate text-sm">
-          {product.name}
-        </span>
-        <button
-          onClick={() => setWished(w => !w)}
-          className="p-2 rounded-full hover:bg-muted transition-colors"
-        >
-          <Heart
-            className={`w-5 h-5 transition-colors ${
-              wished ? "fill-primary text-primary" : "text-foreground"
-            }`}
-          />
+      {/* Product sub-header */}
+      <div style={{
+        height: 64, display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "0 18px", borderBottom: `1px solid ${BORDER}`,
+        position: "sticky", top: "var(--navbar-height, 88px)", zIndex: 30,
+        background: BG,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <button onClick={() => setLocation("/")}
+            style={{ width: 42, height: 42, display: "flex", alignItems: "center", justifyContent: "center", color: "white", background: "none", border: "none", cursor: "pointer", fontSize: 22 }}>
+            ←
+          </button>
+          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: -0.4 }}>{product.name}</span>
+        </div>
+        <button onClick={() => setWished(w => !w)}
+          style={{ width: 42, height: 42, display: "flex", alignItems: "center", justifyContent: "center", color: wished ? TEAL : "white", background: "none", border: "none", cursor: "pointer", fontSize: 24 }}>
+          {wished ? "♥" : "♡"}
         </button>
       </div>
 
-      <div className="max-w-5xl mx-auto w-full">
-        {/* Main grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 md:p-6">
+      {/* Page content */}
+      <div style={{ maxWidth: 480, margin: "0 auto", padding: "22px 18px 100px" }}>
 
-          {/* Gallery */}
-          <div className="flex flex-col gap-3 p-4 md:p-0">
-            <div className="relative rounded-2xl overflow-hidden bg-muted aspect-square md:aspect-auto md:h-[500px]">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={selectedImage}
-                  src={gallery[selectedImage]}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.97 }}
-                  transition={{ duration: 0.22 }}
-                />
-              </AnimatePresence>
-              {product.discount > 0 && (
-                <span className="absolute top-3 left-3 bg-destructive text-destructive-foreground text-xs font-bold px-2.5 py-1 rounded-lg">
-                  -{product.discount}%
-                </span>
-              )}
+        {/* Main image */}
+        <div style={{ position: "relative", borderRadius: 30, overflow: "hidden", background: "#dfe3e8" }}>
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={selectedImage}
+              src={gallery[selectedImage]}
+              alt={product.name}
+              style={{ width: "100%", display: "block", aspectRatio: "1/1", objectFit: "cover" }}
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.2 }}
+            />
+          </AnimatePresence>
+          {product.discount > 0 && (
+            <div style={{
+              position: "absolute", top: 22, left: 22,
+              background: "#991B1B", color: "white",
+              padding: "11px 20px", borderRadius: 999,
+              fontSize: 18, fontWeight: 700,
+            }}>
+              -{product.discount}%
             </div>
+          )}
+        </div>
 
-            {/* Thumbnails */}
-            <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
-              {gallery.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSelectedImage(i)}
-                  className={`shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                    selectedImage === i
-                      ? "border-primary ring-1 ring-primary"
-                      : "border-border hover:border-primary/50"
-                  }`}
-                >
-                  <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-cover" />
-                </button>
+        {/* Thumbnails */}
+        <div style={{ display: "flex", gap: 14, marginTop: 18, overflowX: "auto", paddingBottom: 4 }}>
+          {gallery.map((img, i) => (
+            <button key={i} onClick={() => setSelectedImage(i)}
+              style={{
+                width: 78, height: 78, borderRadius: 22, overflow: "hidden", flexShrink: 0,
+                border: `2px solid ${selectedImage === i ? TEAL : "transparent"}`,
+                boxShadow: selectedImage === i ? `0 0 0 2px rgba(34,211,197,0.2)` : "none",
+                background: CARD2, cursor: "pointer", padding: 0,
+              }}>
+              <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </button>
+          ))}
+        </div>
+
+        {/* Category */}
+        <div style={{ marginTop: 28, color: TEAL, fontSize: 13, fontWeight: 700, letterSpacing: "2.2px", textTransform: "uppercase" }}>
+          {product.brand} · {product.category}
+        </div>
+
+        {/* Product title */}
+        <div style={{ marginTop: 8, fontSize: 36, lineHeight: "42px", fontWeight: 800, letterSpacing: -1.2 }}>
+          {product.name}
+        </div>
+
+        {/* Rating */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 16 }}>
+          <Stars rating={product.rating} />
+          <span style={{ fontSize: 17, fontWeight: 700, marginLeft: 2 }}>{product.rating}</span>
+          <span style={{ fontSize: 17, color: MUTED }}>({product.reviews.toLocaleString()} reviews)</span>
+        </div>
+
+        {/* Price */}
+        <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <div style={{ fontSize: 52, lineHeight: 1, fontWeight: 800, color: TEAL, letterSpacing: -2 }}>
+            {formatPrice(product.price)}
+          </div>
+          {product.originalPrice > product.price && (
+            <div style={{ fontSize: 22, fontWeight: 500, color: "#A9B4C7", textDecoration: "line-through", marginTop: 8 }}>
+              {formatPrice(product.originalPrice)}
+            </div>
+          )}
+          {product.discount > 0 && (
+            <div style={{
+              background: "rgba(127,29,29,0.3)", color: "#EF4444",
+              padding: "8px 16px", borderRadius: 999,
+              fontSize: 17, fontWeight: 700, marginTop: 8,
+            }}>
+              Save {product.discount}%
+            </div>
+          )}
+        </div>
+
+        {/* Description */}
+        <div style={{ marginTop: 24, color: MUTED, fontSize: 17, lineHeight: 1.8, fontWeight: 400 }}>
+          {product.name} — a flagship product offering premium build quality, cutting-edge performance, and an immersive experience. Available with 0% financing from Kryros.
+        </div>
+
+        {/* Color */}
+        <div style={{ marginTop: 32 }}>
+          <div style={{ fontSize: 19, fontWeight: 700 }}>
+            Color: <span style={{ fontWeight: 400, color: MUTED }}>{colors[selectedColor].label}</span>
+          </div>
+          <div style={{ display: "flex", gap: 14, marginTop: 16 }}>
+            {colors.map((c, i) => (
+              <button key={i} onClick={() => setSelectedColor(i)}
+                style={{
+                  width: 52, height: 52, borderRadius: "50%", border: `3px solid ${selectedColor === i ? TEAL : "transparent"}`,
+                  background: c.hex, cursor: "pointer", padding: 0,
+                  boxShadow: selectedColor === i ? `0 0 0 3px rgba(34,211,197,0.15)` : "none",
+                  transition: "all 0.15s",
+                }} />
+            ))}
+          </div>
+        </div>
+
+        {/* Storage/Size */}
+        <div style={{ marginTop: 28 }}>
+          <div style={{ fontSize: 19, fontWeight: 700 }}>
+            Storage: <span style={{ fontWeight: 400, color: MUTED }}>{selectedStorage}</span>
+          </div>
+          <div style={{ display: "flex", gap: 14, marginTop: 16, flexWrap: "wrap" }}>
+            {storages.map(size => (
+              <button key={size} onClick={() => setSelectedStorage(size)}
+                style={{
+                  height: 64, padding: "0 28px", borderRadius: 20,
+                  border: `1px solid ${selectedStorage === size ? "transparent" : "#1E293B"}`,
+                  background: selectedStorage === size ? TEAL : CARD2,
+                  color: selectedStorage === size ? "#000" : "white",
+                  fontSize: 17, fontWeight: 700, cursor: "pointer", transition: "all 0.15s",
+                }}>
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Actions: qty + cart + wishlist */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 28 }}>
+          {/* Qty */}
+          <div style={{
+            width: 140, height: 64, borderRadius: 22, border: `1px solid #1E293B`,
+            background: CARD2, display: "flex", alignItems: "center", justifyContent: "space-around",
+            fontSize: 22, fontWeight: 700,
+          }}>
+            <button onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              style={{ background: "none", border: "none", color: "white", cursor: "pointer", fontSize: 22, padding: "0 12px", height: "100%" }}>
+              −
+            </button>
+            <span style={{ minWidth: 28, textAlign: "center" }}>{quantity}</span>
+            <button onClick={() => setQuantity(quantity + 1)}
+              style={{ background: "none", border: "none", color: "white", cursor: "pointer", fontSize: 22, padding: "0 12px", height: "100%" }}>
+              +
+            </button>
+          </div>
+
+          {/* Add to cart */}
+          <button onClick={handleAddToCart}
+            style={{
+              flex: 1, height: 64, border: "none", borderRadius: 22,
+              background: isAdding ? "#1a9990" : TEAL,
+              color: "white", fontSize: 19, fontWeight: 700, cursor: "pointer",
+              boxShadow: "0 10px 28px rgba(34,211,197,0.2)",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              transition: "background 0.2s",
+            }}>
+            {isAdding ? "✓ Added!" : "🛒 Add to Cart"}
+          </button>
+
+          {/* Wishlist */}
+          <button onClick={() => setWished(w => !w)}
+            style={{
+              width: 64, height: 64, borderRadius: 22, border: `1px solid #1E293B`,
+              background: CARD2, display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 26, cursor: "pointer", color: wished ? TEAL : "white",
+            }}>
+            {wished ? "♥" : "♡"}
+          </button>
+        </div>
+
+        {/* BNPL row */}
+        <div style={{
+          marginTop: 20, background: CARD, border: `1px solid ${BORDER}`,
+          borderRadius: 22, padding: "18px 22px",
+          display: "flex", alignItems: "center", gap: 12,
+        }}>
+          <span style={{ fontSize: 22, color: TEAL }}>⚡</span>
+          <div>
+            <div style={{ fontSize: 16, fontWeight: 700 }}>Pay with Kryros BNPL</div>
+            <div style={{ fontSize: 15, color: MUTED, marginTop: 2 }}>
+              From {formatPrice(Math.round(product.price / 12))}/mo — 0% interest
+            </div>
+          </div>
+        </div>
+
+        {/* Delivery card */}
+        <div style={{ marginTop: 24, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 28, padding: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ color: TEAL, fontSize: 26 }}>🚚</span>
+            <span style={{ fontSize: 22, fontWeight: 700 }}>Delivery</span>
+          </div>
+          <div style={{ marginTop: 14, color: MUTED, fontSize: 16, lineHeight: 1.7 }}>
+            Free standard shipping on orders over $35.
+          </div>
+          {[
+            { label: "Standard", time: "3–5 business days", cost: "$4.50", free: false },
+            { label: "Express",  time: "1–2 business days", cost: "$10.00", free: false },
+            { label: "Pickup",   time: "1–3 business days", cost: "Free", free: true },
+          ].map((row, i, arr) => (
+            <div key={row.label} style={{
+              display: "flex", justifyContent: "space-between", alignItems: "flex-start",
+              padding: "18px 0",
+              borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
+            }}>
+              <div>
+                <div style={{ fontSize: 19, fontWeight: 700 }}>{row.label}</div>
+                <div style={{ fontSize: 17, color: MUTED, marginTop: 2 }}>{row.time}</div>
+              </div>
+              <div style={{ fontSize: 19, fontWeight: 700, color: row.free ? TEAL : "white" }}>
+                {row.cost}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Returns card */}
+        <div style={{ marginTop: 20, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 28, padding: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ color: TEAL, fontSize: 26 }}>↻</span>
+            <span style={{ fontSize: 22, fontWeight: 700 }}>Returns</span>
+          </div>
+          <div style={{ marginTop: 14, color: MUTED, fontSize: 16, lineHeight: 1.7 }}>
+            You have 60 days to return the item.
+          </div>
+          {["Free store return", "Free returns via courier dropoff"].map(item => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 16, fontSize: 17 }}>
+              <span style={{ color: TEAL, fontSize: 20 }}>›</span>
+              {item}
+            </div>
+          ))}
+        </div>
+
+        {/* Warranty card */}
+        <div style={{ marginTop: 20, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 28, padding: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ color: TEAL, fontSize: 26 }}>🛡</span>
+            <span style={{ fontSize: 22, fontWeight: 700 }}>Warranty</span>
+          </div>
+          <div style={{ marginTop: 14, color: MUTED, fontSize: 16, lineHeight: 1.7 }}>
+            1 Year Official Warranty. Includes accidental damage protection for 6 months.
+          </div>
+        </div>
+
+        {/* Footer: share + payments */}
+        <div style={{ marginTop: 32, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
+          <div>
+            <div style={{ color: MUTED, fontSize: 13, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 14 }}>
+              SHARE
+            </div>
+            <div style={{ display: "flex", gap: 12 }}>
+              {["f", "𝕏", "↗"].map(icon => (
+                <div key={icon} style={{
+                  width: 64, height: 64, borderRadius: "50%",
+                  background: CARD2, border: `1px solid ${BORDER}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 22, cursor: "pointer",
+                }}>
+                  {icon}
+                </div>
               ))}
             </div>
           </div>
-
-          {/* Product Info */}
-          <div className="px-4 pb-4 md:px-0 flex flex-col gap-5">
-            {/* Brand + Title + Rating */}
-            <div>
-              <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
-                {product.brand}
-              </p>
-              <h1 className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-3">
-                {product.name}
-              </h1>
-              <div className="flex items-center gap-2">
-                <StarRating rating={product.rating} />
-                <span className="text-sm text-foreground font-medium">{product.rating}</span>
-                <span className="text-sm text-muted-foreground">
-                  ({product.reviews.toLocaleString()} reviews)
-                </span>
-              </div>
+          <div>
+            <div style={{ color: MUTED, fontSize: 13, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 14 }}>
+              PAYMENTS
             </div>
-
-            {/* Price */}
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-black text-primary">
-                {formatPrice(product.price)}
-              </span>
-              {product.originalPrice > product.price && (
-                <span className="text-lg text-muted-foreground line-through">
-                  {formatPrice(product.originalPrice)}
-                </span>
-              )}
-              {product.discount > 0 && (
-                <span className="text-sm font-bold text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">
-                  Save {product.discount}%
-                </span>
-              )}
-            </div>
-
-            {/* BNPL */}
-            <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
-              <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-primary shrink-0" />
-                <h4 className="font-semibold text-foreground text-sm">Pay over time with Kryros BNPL</h4>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {plans.map((plan) => (
-                  <button
-                    key={plan.months}
-                    onClick={() => setSelectedPlan(plan.months)}
-                    className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg border text-sm transition-all ${
-                      selectedPlan === plan.months
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <span className="text-xs font-medium text-muted-foreground mb-1">{plan.months}</span>
-                    <span className="font-bold text-foreground text-sm">{formatPrice(plan.amount)}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Color picker */}
-            <div>
-              <p className="text-sm font-semibold text-foreground mb-2">
-                Color:{" "}
-                <span className="font-normal text-muted-foreground">
-                  {colors[selectedColor].label}
-                </span>
-              </p>
-              <div className="flex gap-2">
-                {colors.map((color, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedColor(i)}
-                    title={color.label}
-                    className={`w-7 h-7 rounded-full border-2 transition-all duration-200 ${
-                      selectedColor === i
-                        ? "border-primary ring-2 ring-primary ring-offset-2 ring-offset-background scale-110"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                    style={{ backgroundColor: color.hex }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Storage selector */}
-            <div>
-              <p className="text-sm font-semibold text-foreground mb-2">
-                Storage:{" "}
-                <span className="font-normal text-muted-foreground">{selectedStorage}</span>
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {storages.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedStorage(size)}
-                    className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-all duration-200 ${
-                      selectedStorage === size
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-card text-foreground hover:border-primary"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Quantity + Actions */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center border border-border rounded-xl overflow-hidden bg-card">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3 py-2.5 hover:bg-muted transition-colors text-foreground"
-                >
-                  <Minus className="w-4 h-4" />
-                </button>
-                <span className="w-10 text-center text-sm font-bold text-foreground">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="px-3 py-2.5 hover:bg-muted transition-colors text-foreground"
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
-              </div>
-
-              <Button
-                onClick={handleAddToCart}
-                className="flex-1 h-11 text-sm font-bold gap-2"
-              >
-                {isAdding ? (
-                  <><Check className="w-4 h-4" /> Added to Cart!</>
-                ) : (
-                  <><ShoppingCart className="w-4 h-4" /> Add to Cart</>
-                )}
-              </Button>
-
-              <button
-                onClick={() => setWished(w => !w)}
-                className="w-11 h-11 flex items-center justify-center rounded-xl border border-border bg-card hover:border-primary hover:text-primary transition-all"
-              >
-                <Heart
-                  className={`w-5 h-5 transition-colors ${
-                    wished ? "fill-primary text-primary" : "text-foreground"
-                  }`}
-                />
-              </button>
-            </div>
-
-            {/* Delivery */}
-            <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
-              <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-primary shrink-0" />
-                <h4 className="font-semibold text-foreground">Delivery</h4>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Free standard shipping on orders over $35.
-              </p>
-              <div className="divide-y divide-border">
-                {[
-                  { label: "Standard", time: "3–5 business days", cost: "$4.50" },
-                  { label: "Express",  time: "1–2 business days", cost: "$10.00" },
-                  { label: "Pickup",   time: "Same day",          cost: "Free" },
-                ].map((row) => (
-                  <div key={row.label} className="flex items-center justify-between py-2 text-sm">
-                    <span className="font-medium text-foreground w-20">{row.label}</span>
-                    <span className="text-muted-foreground flex-1">{row.time}</span>
-                    <span className={`font-semibold ${row.cost === "Free" ? "text-primary" : "text-foreground"}`}>
-                      {row.cost}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Returns */}
-            <div className="rounded-2xl border border-border bg-card p-4 space-y-2">
-              <div className="flex items-center gap-2">
-                <RefreshCw className="w-5 h-5 text-primary shrink-0" />
-                <h4 className="font-semibold text-foreground">Returns</h4>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                You have 60 days to return the item.
-              </p>
-              <ul className="space-y-1">
-                {["Free store return", "Free returns via courier dropoff"].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-foreground">
-                    <ChevronRight className="w-3 h-3 text-primary shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Warranty */}
-            <div className="rounded-2xl border border-border bg-card p-4 space-y-2">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-primary shrink-0" />
-                <h4 className="font-semibold text-foreground">Warranty</h4>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                1 Year Official Warranty. Includes accidental damage protection for 6 months.
-              </p>
-            </div>
-
-            {/* Share */}
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-muted-foreground mb-2 font-medium uppercase tracking-wider">Share</p>
-                <div className="flex gap-3">
-                  {[Facebook, Twitter, Share2].map((Icon, i) => (
-                    <button
-                      key={i}
-                      className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-foreground hover:text-primary hover:border-primary transition-colors"
-                    >
-                      <Icon className="w-4 h-4" />
-                    </button>
-                  ))}
+            <div style={{ display: "flex", gap: 10 }}>
+              {["VISA", "MC", "MTN"].map(p => (
+                <div key={p} style={{
+                  width: 80, height: 64, borderRadius: 20,
+                  background: CARD2, border: `1px solid ${BORDER}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontWeight: 700, fontSize: 15, cursor: "pointer",
+                }}>
+                  {p}
                 </div>
-              </div>
-              <div className="flex items-center text-xs font-medium text-emerald-600 bg-emerald-600/10 px-3 py-2 rounded-xl">
-                <Check className="w-3 h-3 mr-1" /> Kryros Official Store
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="px-4 md:px-6 mb-10">
-          <Tabs defaultValue="description" className="w-full">
-            <TabsList className="w-full justify-start border-b border-border rounded-none h-auto bg-transparent p-0 overflow-x-auto hide-scrollbar flex-nowrap mb-8">
-              <TabsTrigger value="description" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-medium text-base">Description</TabsTrigger>
-              <TabsTrigger value="specs" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-medium text-base">Specifications</TabsTrigger>
-              <TabsTrigger value="reviews" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-medium text-base">Reviews ({product.reviews})</TabsTrigger>
-              <TabsTrigger value="qa" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-medium text-base">Q&A</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="description" className="prose dark:prose-invert max-w-4xl">
-              <h2 className="text-2xl font-bold mb-4 tracking-tight">Forged in titanium.</h2>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                iPhone 15 Pro Max is the first iPhone to feature an aerospace-grade titanium design, using the same alloy that spacecraft use for missions to Mars. Titanium has one of the best strength-to-weight ratios of any metal, making these our lightest Pro models ever.
-              </p>
-              <h3 className="text-xl font-bold mb-4 tracking-tight">A17 Pro chip. A monster win for gaming.</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                It's here. The biggest redesign in the history of Apple GPUs. A17 Pro is an entirely new class of iPhone chip that delivers our best graphics performance by far. Mobile games will look and feel so immersive, with incredibly detailed environments and more realistic characters.
-              </p>
-            </TabsContent>
-
-            <TabsContent value="specs" className="max-w-4xl">
-              <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
-                {[
-                  { label: "Display",      value: "6.7-inch Super Retina XDR display with ProMotion" },
-                  { label: "Processor",    value: "A17 Pro chip, 6-core CPU, 6-core GPU" },
-                  { label: "Camera",       value: "48MP Main, 12MP Ultra Wide, 12MP Telephoto with 5x optical zoom" },
-                  { label: "Battery",      value: "Up to 29 hours video playback, USB-C fast charging" },
-                  { label: "Material",     value: "Aerospace-grade titanium design" },
-                  { label: "Connectivity", value: "5G, Wi-Fi 6E, Bluetooth 5.3" },
-                ].map((spec, i) => (
-                  <div key={i} className="flex flex-col sm:flex-row sm:items-center p-4 bg-card hover:bg-muted/30 transition-colors">
-                    <div className="w-48 font-bold text-sm text-foreground/80 mb-1 sm:mb-0">{spec.label}</div>
-                    <div className="flex-1 text-sm text-muted-foreground">{spec.value}</div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="reviews">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[1, 2, 3].map((i) => (
-                  <Card key={i} className="p-6 border-border shadow-sm">
-                    <div className="flex items-center gap-1 mb-3">
-                      {[1,2,3,4,5].map(s => <Star key={s} className="h-3 w-3 fill-yellow-400 text-yellow-400" />)}
-                    </div>
-                    <h4 className="font-bold mb-2">Absolute powerhouse</h4>
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                      Upgraded from the 12 Pro Max and the difference is night and day. The titanium makes it noticeably lighter and the camera zoom is incredible. Ordered through Kryros BNPL and process was seamless.
-                    </p>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-medium">Mwansa K. <span className="text-emerald-500 font-normal">✓ Verified</span></span>
-                      <span className="text-muted-foreground">2 days ago</span>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-              <div className="mt-8 text-center">
-                <Button variant="outline" className="rounded-full px-8">Load More Reviews</Button>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="qa" className="max-w-3xl">
-              <div className="space-y-4">
-                {[
-                  { q: "Is this the dual physical SIM version?", a: "No, this model supports 1 physical Nano-SIM and 1 eSIM." },
-                  { q: "Does it come with a charger in the box?", a: "It comes with a USB-C charge cable. The power adapter is sold separately." },
-                  { q: "Can I use Kryros BNPL if I'm not a citizen of my country?", a: "Yes, provided you have a valid work permit and meet our credit assessment criteria." },
-                ].map((faq, i) => (
-                  <div key={i} className="bg-card border border-border p-5 rounded-xl">
-                    <div className="font-bold mb-2 flex items-start gap-2">
-                      <span className="text-primary">Q:</span> {faq.q}
-                    </div>
-                    <div className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="font-medium text-foreground">A:</span> {faq.a}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
-
-        {/* You May Also Like */}
-        <div className="px-4 md:px-6 mb-10">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">You May Also Like</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {/* You may also like */}
+        <div style={{ marginTop: 40 }}>
+          <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 20 }}>You May Also Like</div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {PRODUCTS.slice(1, 5).map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} />
             ))}
