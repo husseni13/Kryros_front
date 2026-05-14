@@ -11,6 +11,7 @@ import { FloatingActions } from "@/components/layout/FloatingActions";
 const BG     = "#050816";
 const CARD   = "#0D1B2A";
 const CARD2  = "#0F1F2E";
+const ROW    = "#182638";
 const TEAL   = "#22D3C5";
 const MUTED  = "#8E9AAF";
 const BORDER = "rgba(255,255,255,0.08)";
@@ -274,52 +275,67 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Delivery card */}
-        <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "14px 14px 6px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+        <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
             <span style={{ color: TEAL, fontSize: 15 }}>🚚</span>
             <span style={{ fontSize: 13, fontWeight: 700 }}>Delivery</span>
-            <span style={{ fontSize: 12, color: MUTED, marginLeft: 4 }}>Free on orders over $35</span>
           </div>
-          {[
-            { label: "Standard", time: "3–5 days", cost: "$4.50",  free: false },
-            { label: "Express",  time: "1–2 days", cost: "$10.00", free: false },
-            { label: "Pickup",   time: "1–3 days", cost: "Free",   free: true  },
-          ].map((row, i, arr) => (
-            <div key={row.label} style={{
-              display: "flex", justifyContent: "space-between", alignItems: "center",
-              padding: "8px 0",
-              borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
-            }}>
-              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <span style={{ fontSize: 12, fontWeight: 700, minWidth: 56 }}>{row.label}</span>
-                <span style={{ fontSize: 12, color: MUTED }}>{row.time}</span>
+          <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
+            Free standard shipping on orders over $35.
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {[
+              { label: "Standard", time: "1–4 business days", cost: "$4.50",  free: false },
+              { label: "Express",  time: "1 business day",    cost: "$10.00", free: false },
+              { label: "Pickup",   time: "1–3 business days", cost: "Free",   free: true  },
+            ].map(row => (
+              <div key={row.label} style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                background: ROW, borderRadius: 10,
+                padding: "9px 12px",
+              }}>
+                <span style={{ fontSize: 12, fontWeight: 700, minWidth: 62 }}>{row.label}</span>
+                <span style={{ fontSize: 12, color: MUTED, flex: 1 }}>{row.time}</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</span>
               </div>
-              <span style={{ fontSize: 12, fontWeight: 700, color: row.free ? TEAL : "white" }}>{row.cost}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Returns card */}
-        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "14px 14px 10px" }}>
+        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <span style={{ color: TEAL, fontSize: 15 }}>↻</span>
             <span style={{ fontSize: 13, fontWeight: 700 }}>Returns</span>
-            <span style={{ fontSize: 12, color: MUTED, marginLeft: 4 }}>60-day window</span>
           </div>
-          {["Free store return", "Free returns via courier dropoff"].map(item => (
-            <div key={item} style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6, fontSize: 12, color: MUTED }}>
-              <span style={{ color: TEAL, fontSize: 13 }}>›</span>
-              {item}
-            </div>
-          ))}
+          <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
+            You have 60 days to return the item.
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {["Free store return", "Free returns via USPS Dropoff"].map(item => (
+              <div key={item} style={{
+                display: "flex", alignItems: "center", gap: 8,
+                background: ROW, borderRadius: 10, padding: "9px 12px",
+                fontSize: 12,
+              }}>
+                <span style={{ color: TEAL, fontSize: 13, fontWeight: 700 }}>›</span>
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Warranty card */}
-        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "14px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <span style={{ color: TEAL, fontSize: 15 }}>🛡</span>
             <span style={{ fontSize: 13, fontWeight: 700 }}>Warranty</span>
-            <span style={{ fontSize: 12, color: MUTED, marginLeft: 4 }}>1 Year · Accidental cover 6mo</span>
+          </div>
+          <div style={{
+            background: ROW, borderRadius: 10, padding: "9px 12px",
+            fontSize: 12, color: MUTED,
+          }}>
+            1 Year Official Warranty · Accidental damage cover for 6 months.
           </div>
         </div>
 
