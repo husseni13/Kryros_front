@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Truck, RefreshCw, ShieldCheck, ChevronRight } from "lucide-react";
+import { ShoppingCart, Truck, RefreshCw, ShieldCheck, ChevronRight, Heart } from "lucide-react";
 import { FaFacebook, FaCcVisa, FaCcMastercard } from "react-icons/fa";
 import { FaXTwitter, FaSquareShareNodes } from "react-icons/fa6";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { PRODUCTS } from "@/lib/mockData";
-import { ProductCard } from "@/components/layout/ProductCard";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
@@ -83,8 +82,8 @@ export default function ProductDetailPage() {
           <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.2, color: "var(--foreground)" }}>{product.name}</span>
         </div>
         <button onClick={() => setWished(w => !w)}
-          style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: wished ? TEAL : "var(--foreground)", background: "none", border: "none", cursor: "pointer", fontSize: 18 }}>
-          {wished ? "♥" : "♡"}
+          style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", cursor: "pointer" }}>
+          <Heart size={20} color={wished ? TEAL : "var(--foreground)"} fill={wished ? TEAL : "none"} strokeWidth={2} />
         </button>
       </div>
 
@@ -252,9 +251,9 @@ export default function ProductDetailPage() {
             style={{
               width: 48, height: 48, borderRadius: 16, border: `1px solid ${BORDER}`,
               background: "#15171D", display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 20, cursor: "pointer", color: wished ? TEAL : "var(--foreground)",
+              cursor: "pointer",
             }}>
-            {wished ? "♥" : "♡"}
+            <Heart size={20} color={wished ? TEAL : "var(--foreground)"} fill={wished ? TEAL : "none"} strokeWidth={2} />
           </button>
         </div>
 
@@ -369,15 +368,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* You may also like */}
-        <div style={{ marginTop: 32 }}>
-          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 14, color: "var(--foreground)" }}>You May Also Like</div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            {PRODUCTS.slice(1, 5).map((p, i) => (
-              <ProductCard key={p.id} product={p} index={i} />
-            ))}
-          </div>
-        </div>
       </div>
 
       <FloatingActions />
