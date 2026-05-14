@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingCart, Truck, RefreshCw, ShieldCheck, Zap, ChevronRight } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { PRODUCTS } from "@/lib/mockData";
@@ -244,7 +245,7 @@ export default function ProductDetailPage() {
               display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
               transition: "background 0.2s",
             }}>
-            {isAdding ? "✓ Added!" : "🛒 Add to Cart"}
+            {isAdding ? "✓ Added!" : <><ShoppingCart size={16} style={{ marginRight: 6 }} />Add to Cart</>}
           </button>
 
           {/* Wishlist */}
@@ -264,7 +265,7 @@ export default function ProductDetailPage() {
           borderRadius: 16, padding: "14px 16px",
           display: "flex", alignItems: "center", gap: 10,
         }}>
-          <span style={{ fontSize: 18, color: TEAL }}>⚡</span>
+          <Zap size={16} color={TEAL} strokeWidth={2.5} />
           <div>
             <div style={{ fontSize: 14, fontWeight: 700 }}>Pay with Kryros BNPL</div>
             <div style={{ fontSize: 13, color: MUTED, marginTop: 1 }}>
@@ -276,7 +277,7 @@ export default function ProductDetailPage() {
         {/* Delivery card */}
         <div style={{ marginTop: 14, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-            <span style={{ color: TEAL, fontSize: 15 }}>🚚</span>
+            <Truck size={15} color={TEAL} strokeWidth={2} />
             <span style={{ fontSize: 13, fontWeight: 700 }}>Delivery</span>
           </div>
           <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
@@ -304,7 +305,7 @@ export default function ProductDetailPage() {
         {/* Returns card */}
         <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <span style={{ color: TEAL, fontSize: 15 }}>↻</span>
+            <RefreshCw size={15} color={TEAL} strokeWidth={2} />
             <span style={{ fontSize: 13, fontWeight: 700 }}>Returns</span>
           </div>
           <div style={{ fontSize: 12, color: MUTED, marginBottom: 10 }}>
@@ -318,7 +319,7 @@ export default function ProductDetailPage() {
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
                 fontSize: 13,
               }}>
-                <span style={{ color: TEAL, fontSize: 14, fontWeight: 700 }}>›</span>
+                <ChevronRight size={14} color={TEAL} strokeWidth={2.5} />
                 {item}
               </div>
             ))}
@@ -328,7 +329,7 @@ export default function ProductDetailPage() {
         {/* Warranty card */}
         <div style={{ marginTop: 10, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <span style={{ color: TEAL, fontSize: 15 }}>🛡</span>
+            <ShieldCheck size={15} color={TEAL} strokeWidth={2} />
             <span style={{ fontSize: 13, fontWeight: 700 }}>Warranty</span>
           </div>
           <div style={{ fontSize: 13, color: MUTED }}>
