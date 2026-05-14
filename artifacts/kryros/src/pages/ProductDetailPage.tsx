@@ -205,8 +205,8 @@ export default function ProductDetailPage() {
               <button key={size} onClick={() => setSelectedStorage(size)}
                 style={{
                   height: 44, padding: "0 18px", borderRadius: 14,
-                  border: `1px solid ${selectedStorage === size ? "transparent" : "#1E293B"}`,
-                  background: selectedStorage === size ? TEAL : CARD2,
+                  border: `1px solid ${selectedStorage === size ? "transparent" : BORDER}`,
+                  background: selectedStorage === size ? TEAL : CARD,
                   color: selectedStorage === size ? "#000" : "white",
                   fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.15s",
                 }}>
@@ -220,8 +220,8 @@ export default function ProductDetailPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 22 }}>
           {/* Qty */}
           <div style={{
-            width: 110, height: 48, borderRadius: 16, border: `1px solid #1E293B`,
-            background: CARD2, display: "flex", alignItems: "center", justifyContent: "space-around",
+            width: 110, height: 48, borderRadius: 16, border: `1px solid ${BORDER}`,
+            background: CARD, display: "flex", alignItems: "center", justifyContent: "space-around",
             fontSize: 17, fontWeight: 700,
           }}>
             <button onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -251,8 +251,8 @@ export default function ProductDetailPage() {
           {/* Wishlist */}
           <button onClick={() => setWished(w => !w)}
             style={{
-              width: 48, height: 48, borderRadius: 16, border: `1px solid #1E293B`,
-              background: CARD2, display: "flex", alignItems: "center", justifyContent: "center",
+              width: 48, height: 48, borderRadius: 16, border: `1px solid ${BORDER}`,
+              background: CARD, display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 20, cursor: "pointer", color: wished ? TEAL : "white",
             }}>
             {wished ? "♥" : "♡"}
