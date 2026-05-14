@@ -274,9 +274,9 @@ export default function ProductDetailPage() {
         <div style={{ marginTop: 14, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
             <Truck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Delivery</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>Delivery</span>
           </div>
-          <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "#ffffff", marginBottom: 10 }}>
             Free standard shipping on orders over $35.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -290,9 +290,9 @@ export default function ProductDetailPage() {
                 padding: "10px 0",
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
               }}>
-                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "var(--card-foreground)" }}>{row.label}</span>
-                <span style={{ fontSize: 13, color: "var(--muted-foreground)", flex: 1 }}>{row.time}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "var(--card-foreground)" }}>{row.cost}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, minWidth: 66, color: "#ffffff" }}>{row.label}</span>
+                <span style={{ fontSize: 13, color: "#ffffff", flex: 1 }}>{row.time}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: row.free ? TEAL : "#ffffff" }}>{row.cost}</span>
               </div>
             ))}
           </div>
@@ -302,9 +302,9 @@ export default function ProductDetailPage() {
         <div style={{ marginTop: 10, background: "var(--card)", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <RefreshCw size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--card-foreground)" }}>Returns</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>Returns</span>
           </div>
-          <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginBottom: 10 }}>
+          <div style={{ fontSize: 12, color: "#ffffff", marginBottom: 10 }}>
             You have 60 days to return the item.
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -313,7 +313,7 @@ export default function ProductDetailPage() {
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "10px 0",
                 borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : "none",
-                fontSize: 13, color: "var(--card-foreground)",
+                fontSize: 13, color: "#ffffff",
               }}>
                 <ChevronRight size={14} color={TEAL} strokeWidth={2.5} />
                 {item}
