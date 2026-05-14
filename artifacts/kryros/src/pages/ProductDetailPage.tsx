@@ -322,17 +322,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Warranty card */}
-        <div style={{ marginTop: 10, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <ShieldCheck size={15} color={TEAL} strokeWidth={2} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>Warranty</span>
-          </div>
-          <div style={{ fontSize: 13, color: "#888888" }}>
-            1 Year Official Warranty · Accidental damage cover for 6 months.
-          </div>
-        </div>
-
         {/* Footer: share + payments */}
         <div style={{ marginTop: 26, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
           <div>
