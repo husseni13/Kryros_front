@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Truck, RefreshCw, ShieldCheck, Zap, ChevronRight } from "lucide-react";
+import { ShoppingCart, Truck, RefreshCw, ShieldCheck, ChevronRight } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { PRODUCTS } from "@/lib/mockData";
@@ -268,21 +268,6 @@ export default function ProductDetailPage() {
           }}>
           ⚡ Buy Now
         </button>
-
-        {/* BNPL */}
-        <div style={{
-          marginTop: 14, background: "var(--card)", border: `1px solid var(--card-border)`,
-          borderRadius: 16, padding: "14px 16px",
-          display: "flex", alignItems: "center", gap: 10,
-        }}>
-          <Zap size={16} color={TEAL} strokeWidth={2.5} />
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "var(--card-foreground)" }}>Pay with Kryros BNPL</div>
-            <div style={{ fontSize: 13, color: MUTED, marginTop: 1 }}>
-              From {formatPrice(Math.round(product.price / 12))}/mo — 0% interest
-            </div>
-          </div>
-        </div>
 
         {/* Delivery card */}
         <div style={{ marginTop: 14, background: "#1C1F26", border: `1px solid var(--card-border)`, borderRadius: 16, padding: 14 }}>
